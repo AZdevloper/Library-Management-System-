@@ -1,6 +1,16 @@
 <?php
-    include('scripts.php');
-	
+
+	session_start();
+
+
+	if($_SESSION['con'] == 'success' ){
+		 
+	echo'	hello';
+
+	}else {
+		header("Location: sign_in.php");
+		die("error");
+	}
 ?>
 
 <!DOCTYPE html>
@@ -192,16 +202,27 @@
 							<div class="menu-text">Scrum Board</div>
 						</a>
 					</div>
+					
 
 					<!-- BEGIN minify-button -->
 					<div class="menu-item d-flex">
 						<a  href="javascript:;" class="app-sidebar-minify-btn ms-auto" data-toggle="app-sidebar-minify"><i class="fa fa-angle-double-left"></i></a>
 					</div>
+				
 					<!-- END minify-button -->
-				</div>
+					</div>
+					<form action="scripts.php" method="POST" >
+						<div class="form-group">
+							
+							<button type="submit" class="btn  btn-danger"  name="sign_out" value="sign_out"><i class="fa-solid fa-right-from-bracket"></i></i></button>
+						</div>
+					</form>
+					
+				
 				<!-- END menu -->
 			</div>
 			<!-- END scrollbar -->
+		
 		</div>
 		<div class="app-sidebar-bg"></div>
 		<div class="app-sidebar-mobile-backdrop"><a href="#" data-dismiss="app-sidebar-mobile" class="stretched-link"></a></div>
@@ -243,7 +264,7 @@
 					<th scope="col">Titre</th>
 					<th scope="col">Auteur</th>
 					<th scope="col">Année</th>
-					<th scope="col">Type</th>
+					<th scope="col">langage</th>
 					<th scope="col">Disponible</th>
 				  </tr>
 				</thead>
@@ -253,7 +274,7 @@
 					<td>seven habits </td>
 					<td>marck</td>
 					<td>2001</td>
-					<td>politice</td>
+					<td>francais</td>
 					<td>5</td>
 				  </tr>
 				

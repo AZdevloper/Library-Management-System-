@@ -2,8 +2,31 @@
 
 <?php
 
-    //INCLUDE DATABASE FILE
-    include('connexion.php');
+  session_start();
+
+//   function check_user($conn){
+//     if (issset($_SESSION['email'])) {
+//         $email  = $_SESSION['email'];
+
+//         $sql = "SELECT * FROM `book` WHERE  email = $email ";
+// 		$result =  $conn->query($sql);
+// 		header("Location: index.php");
+// 		die;  
+
+//     }
+
+  
+
+	
+  
+  if (isset($_POST['sign_out'])) {
+
+    session_destroy();
+    header("Location: sign_in.php");
+
+  }
+
+
  
 
     //ROUTING
