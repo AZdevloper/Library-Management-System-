@@ -1,41 +1,51 @@
-
-
 <?php
+include('connexion.php');
+session_start();
 
-  session_start();
+if (isset($_POST['sign_out'])) {
 
-//   function check_user($conn){
-//     if (issset($_SESSION['email'])) {
-//         $email  = $_SESSION['email'];
+  session_destroy();
+  header("Location: sign_in.php");
 
-//         $sql = "SELECT * FROM `book` WHERE  email = $email ";
-// 		$result =  $conn->query($sql);
-// 		header("Location: index.php");
-// 		die;  
+}
 
-//     }
+function get_all_books()
+{
+  global $conn;
 
-  
 
-	
-  
-  if (isset($_POST['sign_out'])) {
+  $sql = "SELECT
+            b.title, b.author, b.availabel, b.publish_year, b.isbn, l.name as langage
+                           FROM language l
+                           JOIN book b
+                           ON l.id = b.language_id ;";
 
-    session_destroy();
-    header("Location: sign_in.php");
+  $result = $conn->query($sql);
+  foreach ($result as $row) {
+    echo'  <tr>
+
+
+    <th scope="row"> '.$row['isbn'].'</th>
+    <td> '.$row['title'].'  </td>
+    <td>'.$row['author'].' </td>
+    <td>'.$row['publish_year'].' </td>
+    <td> '.$row['langage'].'</td>
+    <td> '.$row['availabel'].'</td>
+</tr>';
 
   }
 
+}
 
- 
 
-    //ROUTING
-    // if(isset($_POST['save']))        saveTask();
-    // if(isset($_POST['update']))      updateTask();
-    // if(isset($_GET['id']))      deleteTask();
-    // if(isset($_GET['upid']))      $stor_index = $_GET['upid'];;
-     
-    
+
+//ROUTING
+// if(isset($_POST['save']))        saveTask();
+// if(isset($_POST['update']))      updateTask();
+// if(isset($_GET['id']))      deleteTask();
+// if(isset($_GET['upid']))      $stor_index = $_GET['upid'];;
+
+
 
 //     $sql ="SELECT * FROM `book` WHERE 1";
 //    $result = $conn->exec($sql);
@@ -47,11 +57,11 @@
 
 //       }
 
-      
-                
-    
+
+
+
 // function getTasks($task_status){ 
-        
+
 //     $sql ="select * from book ";
 //     $conn->exec($sql);
 //       foreach($conn as $row){
@@ -71,14 +81,14 @@
 //             $Status = $_POST["Status"];
 //             $date = $_POST["Date"];
 //             $description = $_POST["Description"];
-            
+
 
 //     if (empty($type) || empty( $title ) ||empty($Priority) || empty($Status) ||empty($date) || empty($description) ) {
 //         $_SESSION['form_vide_message'] = "pleas fill all the form !";
 //     }else{
 
 
-            
+
 //     $sql = "INSERT INTO tasks ( title, type_id, priority_id, status_id, task_datetime, descreption)"
 //             ." VALUES ('$title','$type','$Priority','$Status','$date','$description')";
 
@@ -88,15 +98,15 @@
 //     if (!$result) {
 //         $_SESSION['message'] = "Task did not  added !";
 //         header('location: index.php');
-        
+
 //     }else {
 
 //         $_SESSION['message'] = "Task has been added successfully !";
 //         header('location: index.php');
 //     }
-        
 
-            
+
+
 //     }        
 //         }
 
@@ -121,15 +131,15 @@
 //     $Status = $_POST["Status"];
 //     $date = $_POST["Date"];
 //     $description = $_POST["Description"];
-    
+
 
 //     if (empty($type) || empty( $title ) ||empty($Priority) || empty($Status) ||empty($date) || empty($description) ) {
 //     $_SESSION['form_vide_message'] = "pleas fill all the form !";
 //     }else{
 
 
-        
- 
+
+
 //         $sql ="    UPDATE `tasks` SET `title`='$title',`type_id`='$type',`priority_id`='$Priority',`status_id`='$Status',
 //                         `task_datetime`='$date',`descreption`='$description',`id`='$id' WHERE id = $id";
 
@@ -147,32 +157,32 @@
 //     }
 
 
-        
+
 //     }   
-   
+
 // }
 
 
 // function deleteTask()
 
 
-    // {     include('database.php');
-    //     $id = $_GET['id'];
-    //     echo $id;
-    //     //CODE HERE
-    // $sql = "  DELETE FROM `tasks` WHERE id = $id";
-    // $result = mysqli_query($conn,$sql);
+// {     include('database.php');
+//     $id = $_GET['id'];
+//     echo $id;
+//     //CODE HERE
+// $sql = "  DELETE FROM `tasks` WHERE id = $id";
+// $result = mysqli_query($conn,$sql);
 
-    // if (!$result){
+// if (!$result){
 
-    //     $_SESSION['message'] = "Task did not  deleted!";
+//     $_SESSION['message'] = "Task did not  deleted!";
 
-    //         header('location: index.php');}
+//         header('location: index.php');}
 
-    //     else {
-    //         $_SESSION['message'] = "Task has been deleted successfully!";
-    //         header('location: index.php');
-    //     }
-    // }
+//     else {
+//         $_SESSION['message'] = "Task has been deleted successfully!";
+//         header('location: index.php');
+//     }
+// }
 
 ?>
