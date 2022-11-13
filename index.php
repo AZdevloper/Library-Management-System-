@@ -204,7 +204,7 @@ include('scripts.php');
                             <div class="menu-icon">
                                 <i class="fa fa-list-check"></i>
                             </div>
-                            <div class="menu-text">Scrum Board</div>
+                            <div class="menu-text">géstion </div>
                         </a>
                     </div>
 
@@ -243,7 +243,7 @@ include('scripts.php');
                 <div>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-                        <li class="breadcrumb-item active">Scrum Board </li>
+                        <li class="breadcrumb-item active">géstion </li>
                     </ol>
 
                 </div>
@@ -274,9 +274,15 @@ include('scripts.php');
                         <th scope="col">Auteur</th>
                         <th scope="col">Année</th>
                         <th scope="col">langage</th>
-                        <th scope="col">Disponible</th>
+                       
+                        <div class=" d-inline-block  ">
+				<a href="#modal-task" onclick="resit()" data-bs-toggle="modal" class="btn btn-success btn-rounded px-4 rounded-pill"><i class="fa fa-plus fa-lg me-2 ms-n2 text-success-900"></i> Ajouter livre</a>
+				</div>
+            
                     </tr>
+                    
                 </thead>
+                
                 <tbody> <?php get_all_books()?>
 
 
@@ -298,7 +304,7 @@ include('scripts.php');
                 <div class="modal-content">
                     <form action="scripts.php" method="POST" id="form-task">
                         <div class="modal-header">
-                            <h5 class="modal-title"> Add Task </h5>
+                            <h5 class="modal-title"> Ajouter livre </h5>
                             <a href="#" class="btn-close" data-bs-dismiss="modal"></a>
                         </div>
                         <?php if (isset($_SESSION['form_vide_message'])): ?>
@@ -313,13 +319,23 @@ include('scripts.php');
                         <?php endif ?>
                         <a href=""></a>
                         <div class="modal-body">
+                        <!-- isbn	Author	title	language_id	publish_year	availabel -->
                             <!-- This Input Allows Storing Task Index  -->
-                            <input name="input-hidden" type="hidden" id="task-id" value="">
+                            <input name="input_hidden" type="hidden" id="book_id" value="">
                             <div class="mb-3">
-                                <label class="form-label">Title</label>
-                                <input type="text" name="title" class="form-control" id="task-title" />
+                                <label class="form-label">isbn de livre </label>
+                                <input type="text" name="isbn" class="form-control" id="book_isbn" />
                             </div>
                             <div class="mb-3">
+                                <label class="form-label">auteur </label>
+                                <input type="text" name="author" class="form-control" id="book_author" />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">titre </label>
+                                <input type="text" name="title" class="form-control" id="book_title" />
+                            </div>
+                         
+                           <!-- <div class="mb-3">
                                 <label class="form-label">Type</label>
                                 <div class="ms-3">
                                     <div class="form-check mb-1">
@@ -335,18 +351,18 @@ include('scripts.php');
                                 </div>
 
 
-                            </div>
+                            </div>-->
                             <div class="mb-3">
-                                <label class="form-label">Priority</label>
-                                <select name='Priority' class="form-select" id="task-priority">
-                                    <option selected> select priority her </option>
-                                    <option id="1_low" value="1">Low</option>
-                                    <option id="2_Medium" value="2">Medium</option>
-                                    <option id="3_High" value="3">High</option>
-                                    <option id="4_Critical" value="4">Critical</option>
+                                <label class="form-label">langue</label>
+                                <select name='lang' class="form-select" id="book_lang">
+                                    <option selected> selectioner la langue ici </option>
+                                    <option id="book_english" value="1">english</option>
+                                    <option id="book_frensch" value="2">spanish</option>
+                                    <option id="book_espagnol" value="3">french</option>
+                                    <option id="book_arabic" value="4">arabic</option>
                                 </select>
                             </div>
-                            <div class="mb-3">
+                           <!-- <div class="mb-3">
                                 <label class="form-label">Status</label>
                                 <select class="form-select" id="task-status" name="Status">
                                     <option value="">Please select</option>
@@ -354,26 +370,26 @@ include('scripts.php');
                                     <option value="2">In Progress</option>
                                     <option value="3">Done</option>
                                 </select>
-                            </div>
+                            </div>-->
                             <div class="mb-3">
-                                <label class="form-label">Date</label>
-                                <input type="date" class="form-control" name="Date" id="task-date" />
+                                <label class="form-label"> date de publication </label>
+                                <input type="date" class="form-control" name="date" id="book_date" />
                             </div>
-                            <div class="mb-0">
+                            <!--<div class="mb-0">
                                 <label class="form-label">Description</label>
                                 <textarea class="form-control" name='Description' rows="10"
                                     id="task-description"></textarea>
-                            </div>
+                            </div>-->
 
                         </div>
                         <div class="modal-footer">
                             <a href="#" class="btn btn-white" data-bs-dismiss="modal">Cancel</a>
                             <button type="submit" name="delete" class="btn btn-danger task-action-btn"
-                                id="task-delete-btn">Delete</a>
+                                id="task-delete-btn">supremer</a>
                                 <button type="submit" name="update" class="btn btn-warning task-action-btn"
-                                    id="task-update-btn">Update</a>
+                                    id="task-update-btn">modifier</a>
                                     <button type="submit" name="save" class="btn btn-primary task-action-btn"
-                                        id="task-save-btn">Save</button>
+                                        id="task-save-btn">ajouter</button>
                         </div>
                     </form>
                 </div>
@@ -382,6 +398,8 @@ include('scripts.php');
         <!-- ================== BEGIN core-js ================== -->
         <script src="assets/js/vendor.min.js"></script>
         <script src="assets/js/app.min.js"></script>
+        <script src="assets/js/main.js"></script>
+
         <!-- ================== END core-js ================== -->
 
         <script>

@@ -1,5 +1,5 @@
 <?php
-
+include('scripts.php');
 	session_start();
 
 
@@ -256,7 +256,23 @@
 					
 					<button type="button" class="btn-close" data-bs-dismiss="alert"></span>
 				</div>
-			<?php endif ?>
+			<?php endif  ?>
+			<div class=" d-flex justify-content-around  align-items-center">
+				<span class=" fw-800 fs-20px w-200px h-100px bg-blue-100 ">
+					<?php statistical()?> <br> livre disponible
+				</span>
+				<span class=" fw-800 fs-20px w-200px h-100px bg-blue-100 ">
+					<?php statistical()?> <br> livre ajouter
+				</span>
+				<span class=" fw-800 fs-20px w-200px h-100px bg-blue-100 ">
+					<?php echo $indexsuprem ?> <br> livre supremer
+				</span>
+				<span class=" fw-800 fs-20px w-200px h-100px bg-blue-100 ">
+					<?php statistical()?> <br> livre modifier
+				</span>
+
+			</div>
+            
 			<table class="table">
 				<thead>
 				  <tr>
