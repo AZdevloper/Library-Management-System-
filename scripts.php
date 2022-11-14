@@ -1,4 +1,5 @@
 <?php
+
 include('connexion.php');
 session_start();
 if (isset($_POST['save']))
@@ -7,6 +8,8 @@ if (isset($_POST['update']))
   update_book();
 if (isset($_GET['id']))
   delete_book();
+  if (isset($_POST['sauvegarde']))
+    update_profile();
 
 
 // if (isset($_GET['id'])) {
@@ -186,6 +189,48 @@ function  update_book()
 
 }
 
+
+function update_profile(){
+
+
+  global $conn;
+  $userfrnam = $_POST["userfrnam"];
+  $userlsnam = $_POST["userlsnam"];
+  $useremail = $_POST["useremail"];
+  $userid = $_SESSION["userid"];
+ 
+
+
+
+ 
+
+
+
+    $sql = "UPDATE `users` SET `first_name`='$userfrnam',`last_name`='$userlsnam',`email`='$useremail' WHERE id =  $userid ";
+       
+    $result = $conn->query($sql);
+
+
+    if (!$result) {
+      $_SESSION['message'] = "error votre profile n'est étté pas moudifier !";
+      header('Location: index.php');
+
+    } else {
+
+  
+           $_SESSION["userfrnam"] = $userfrnam;
+           $_SESSION["userlsnam"] = $userlsnam;
+           $_SESSION["useremail"] =  $useremail;
+         
+
+      $_SESSION['message'] = "votre profile est modifier avec succée !";
+      header('Location: index.php');
+    }
+
+
+
+  
+}
 //ROUTING
 // if(isset($_POST['save']))        saveTask();
 // if(isset($_POST['update']))      updateTask();

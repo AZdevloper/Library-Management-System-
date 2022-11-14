@@ -1,22 +1,25 @@
 <?php
 	session_start();
     include('connexion.php');
-
+   
     if( $_SERVER['REQUEST_METHOD'] == "POST" ){
-
+	
 		// collecte data from user 
 	
 		$email      = $_POST['email'];
 		$password   = $_POST['password'];
 		
 		if (!empty($password) && !empty($email)) {
-
+			$g = "test";  
 		$sql = "SELECT * FROM users  WHERE email ='$email' AND password = '$password' limit 1 ";
 
 		$result =  $conn->query($sql);
 		   foreach( $result as $row ) {
-                  
-
+           $_SESSION["userfrnam"] = $row["first_name"];
+           $_SESSION["userlsnam"] = $row["last_name"];
+           $_SESSION["useremail"] = $row["email"];
+           $_SESSION["userid"] = $row["id"]	;
+			
 					if ( $row) {
 						echo 'access to bd';
 						$_SESSION['con'] = 'success' ;
@@ -49,7 +52,7 @@
 	<div class="d-flex justify-content-center ">
 		<div class="card">
 			<div class="card-header ">
-				<h3>Sign In</h3>
+				<h3>Sign In</h3> <?php echo $g ;?>
 				<div class="d-flex justify-content-end social_icon">
 					<span><i class="fab fa-facebook-square"></i></span>
 					<span><i class="fab fa-google-plus-square"></i></span>

@@ -45,7 +45,7 @@ include('scripts.php');
             <!-- BEGIN navbar-header -->
             <div class="navbar-header">
                 <a href="index.html" class="navbar-brand"><i class="fa-solid fa-book m-10px"></i> <b
-                        class="me-1">Mes</b> Documents</a>
+                        class="me-1">Library</b> MGS</a>
                 <button type="button" class="navbar-mobile-toggler" data-toggle="app-sidebar-mobile">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -128,13 +128,16 @@ include('scripts.php');
                 </div>
 
                 <div class="navbar-item navbar-user dropdown">
-                    <a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
-                        <img src="assets/img/user/user-13.jpg" alt="" />
-                        <span>
-                            <span class="d-none d-md-inline">Jilali Smith</span>
-                            <b class="caret"></b>
-                        </span>
-                    </a>
+                  
+                     <a data-bs-target="#form-profile" class="navbar-link dropdown-toggle d-flex align-items-center"
+                         data-bs-toggle="modal">
+                         <img src="assets/img/users/user1.jpeg" alt="" />
+                         <span>
+                             <span class="d-none d-md-inline"><?php echo $_SESSION["userfrnam"].$_SESSION["userlsnam"] ?></span>
+                             <b class="caret"></b>
+                         </span>
+                     </a>
+                
                     <div class="dropdown-menu dropdown-menu-end me-1">
                         <a href="javascript:;" class="dropdown-item">Edit Profile</a>
                         <a href="javascript:;" class="dropdown-item d-flex align-items-center">
@@ -151,6 +154,54 @@ include('scripts.php');
             <!-- END header-nav -->
         </div>
         <!-- END #header -->
+
+        <!-- profile -->
+        <div class="modal fade" id="form-profile">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="scripts.php" method="POST" id="form-task">
+                        <div class="modal-header">
+                            <h5 class="modal-title">profile </h5>
+                            <a href="#" class="btn-close" data-bs-dismiss="modal"></a>
+                        </div>
+                       
+                        <div class="modal-body mx-auto">
+                           
+                        <img src="assets/img/users/user1.jpeg" alt="" srcset="">
+                           
+
+                        </div class=" border border-success">
+                     <h2 class="border-bottom">informations personnels</h2>
+                   
+                            <div class="row  w-75 m-1">
+                                <p class="  col-4 fw-700">nom:</p>       <input class="col-8" name="userfrnam" type="text" value="<?php echo $_SESSION["userfrnam"]?>">
+                            </div>
+
+                            <div class="row  w-75 m-1">
+                                <p class=" col-4 fw-700">prenom:</p>         <input class="col-8" name="userlsnam" type="text" value="<?php echo $_SESSION["userlsnam"]?>"><br>
+                            </div>
+
+                            <div class="row  w-75 m-1">
+                                <p class=" col-4 fw-700">email address:</p>      <input class="col-8" name="useremail" type="text" value="<?php echo $_SESSION["useremail"] ?>"> 
+                                    
+                            </div>                     
+                    
+                       
+                      
+                       
+                        
+                         <div>
+                               
+                               
+                                   <button type="submit" name="sauvegarde" class="btn btn-warning task-action-btn"
+                                      >sauvegarde</button>
+                                  
+                            
+                         </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
         <!-- BEGIN #sidebar -->
         <div id="sidebar" class="app-sidebar">
@@ -274,15 +325,17 @@ include('scripts.php');
                         <th scope="col">Auteur</th>
                         <th scope="col">Année</th>
                         <th scope="col">langage</th>
-                       
+
                         <div class=" d-inline-block  ">
-				<a href="#modal-task" onclick="resit()" data-bs-toggle="modal" class="btn btn-success btn-rounded px-4 rounded-pill"><i class="fa fa-plus fa-lg me-2 ms-n2 text-success-900"></i> Ajouter livre</a>
-				</div>
-            
+                            <a href="#modal-task" onclick="resit()" data-bs-toggle="modal"
+                                class="btn btn-success btn-rounded px-4 rounded-pill"><i
+                                    class="fa fa-plus fa-lg me-2 ms-n2 text-success-900"></i> Ajouter livre</a>
+                        </div>
+
                     </tr>
-                    
+
                 </thead>
-                
+
                 <tbody> <?php get_all_books()?>
 
 
@@ -319,7 +372,7 @@ include('scripts.php');
                         <?php endif ?>
                         <a href=""></a>
                         <div class="modal-body">
-                        <!-- isbn	Author	title	language_id	publish_year	availabel -->
+                            <!-- isbn	Author	title	language_id	publish_year	availabel -->
                             <!-- This Input Allows Storing Task Index  -->
                             <input name="input_hidden" type="hidden" id="book_id" value="">
                             <div class="mb-3">
@@ -334,24 +387,6 @@ include('scripts.php');
                                 <label class="form-label">titre </label>
                                 <input type="text" name="title" class="form-control" id="book_title" />
                             </div>
-                         
-                           <!-- <div class="mb-3">
-                                <label class="form-label">Type</label>
-                                <div class="ms-3">
-                                    <div class="form-check mb-1">
-                                        <input class="form-check-input" name="task-type" type="radio" value="1"
-                                            id="task-type-feature" />
-                                        <label class="form-check-label" for="task-type-feature">Feature</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" name="task-type" type="radio" value="2"
-                                            id="task-type-bug" />
-                                        <label class="form-check-label" for="task-type-bug">Bug</label>
-                                    </div>
-                                </div>
-
-
-                            </div>-->
                             <div class="mb-3">
                                 <label class="form-label">langue</label>
                                 <select name='lang' class="form-select" id="book_lang">
@@ -362,7 +397,7 @@ include('scripts.php');
                                     <option id="book_arabic" value="4">arabic</option>
                                 </select>
                             </div>
-                           <!-- <div class="mb-3">
+                            <!-- <div class="mb-3">
                                 <label class="form-label">Status</label>
                                 <select class="form-select" id="task-status" name="Status">
                                     <option value="">Please select</option>
@@ -395,6 +430,7 @@ include('scripts.php');
                 </div>
             </div>
         </div>
+
         <!-- ================== BEGIN core-js ================== -->
         <script src="assets/js/vendor.min.js"></script>
         <script src="assets/js/app.min.js"></script>
