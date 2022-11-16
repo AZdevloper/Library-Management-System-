@@ -44,7 +44,7 @@ include('scripts.php');
         <div id="header" class="app-header">
             <!-- BEGIN navbar-header -->
             <div class="navbar-header">
-                <a href="index.html" class="navbar-brand"><i class="fa-solid fa-book m-10px"></i> <b
+                <a href="index.php" class="navbar-brand"><i class="fa-solid fa-book m-10px"></i> <b
                         class="me-1">Library</b> MGS</a>
                 <button type="button" class="navbar-mobile-toggler" data-toggle="app-sidebar-mobile">
                     <span class="icon-bar"></span>
@@ -63,7 +63,7 @@ include('scripts.php');
                         </div>
                     </form>
                 </div>
-                <div class="navbar-item dropdown">
+              <!--   <div class="navbar-item dropdown">
                     <a href="#" data-bs-toggle="dropdown" class="navbar-link dropdown-toggle icon">
                         <i class="fa fa-bell"></i>
                         <span class="badge">5</span>
@@ -125,20 +125,20 @@ include('scripts.php');
                             <a href="javascript:;" class="text-decoration-none">View more</a>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="navbar-item navbar-user dropdown">
+                <div class="navbar-item navbar-user ">
                   
-                     <a data-bs-target="#form-profile" class="navbar-link dropdown-toggle d-flex align-items-center"
+                     <a data-bs-target="#form-profile" class="navbar-link  "
                          data-bs-toggle="modal">
                          <img src="assets/img/users/user1.jpeg" alt="" />
-                         <span>
-                             <span class="d-none d-md-inline"><?php echo $_SESSION["userfrnam"].$_SESSION["userlsnam"] ?></span>
-                             <b class="caret"></b>
-                         </span>
+                        
+                             <span class="d-none d-md-inline"><?php echo $_SESSION["userfrnam"].' '.$_SESSION["userlsnam"] ?></span>
+                             
+                        
                      </a>
                 
-                    <div class="dropdown-menu dropdown-menu-end me-1">
+                    <!-- <div class="dropdown-menu dropdown-menu-end me-1">
                         <a href="javascript:;" class="dropdown-item">Edit Profile</a>
                         <a href="javascript:;" class="dropdown-item d-flex align-items-center">
                             Inbox
@@ -148,7 +148,7 @@ include('scripts.php');
                         <a href="javascript:;" class="dropdown-item">Setting</a>
                         <div class="dropdown-divider"></div>
                         <a href="javascript:;" class="dropdown-item">Log Out</a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <!-- END header-nav -->
@@ -159,7 +159,7 @@ include('scripts.php');
         <div class="modal fade" id="form-profile">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action="scripts.php" method="POST" id="form-task">
+                    <form action="scripts.php" method="POST" >
                         <div class="modal-header">
                             <h5 class="modal-title">profile </h5>
                             <a href="#" class="btn-close" data-bs-dismiss="modal"></a>
@@ -171,7 +171,7 @@ include('scripts.php');
                            
 
                         </div class=" border border-success">
-                     <h2 class="border-bottom">informations personnels</h2>
+                            <h2 class="border-bottom m-2">informations personnels</h2>
                    
                             <div class="row  w-75 m-1">
                                 <p class="  col-4 fw-700">nom:</p>       <input class="col-8" name="userfrnam" type="text" value="<?php echo $_SESSION["userfrnam"]?>">
@@ -186,14 +186,10 @@ include('scripts.php');
                                     
                             </div>                     
                     
-                       
-                      
-                       
-                        
                          <div>
                                
                                
-                                   <button type="submit" name="sauvegarde" class="btn btn-warning task-action-btn"
+                                   <button type="submit" name="sauvegarde" class="btn btn-warning task-action-btn mx-2"
                                       >sauvegarde</button>
                                   
                             
@@ -210,69 +206,35 @@ include('scripts.php');
                 <!-- BEGIN menu -->
                 <div class="menu">
                     <div class="menu-profile">
-                        <a href="javascript:;" class="menu-profile-link" data-toggle="app-sidebar-profile"
-                            data-target="#appSidebarProfileMenu">
-                            <div class="menu-profile-cover with-shadow"></div>
-                            <div class="menu-profile-image">
-                                <img src="assets/img/user/user-13.jpg" alt="" />
-                            </div>
-                            <div class="menu-profile-info">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-grow-1">
-                                        Jilali Smith
+                          
+                            
+                                <div class="d-flex ">
+                                    <div class="">
+                                        <?php echo $_SESSION["userfrnam"]. ' '.$_SESSION["userlsnam"] ?>
                                     </div>
-                                    <div class="menu-caret ms-auto"></div>
+                                
                                 </div>
-                                <small>Front end developer</small>
-                            </div>
-                        </a>
+                                <small>Admin</small>
+                         
+                   
                     </div>
-                    <div id="appSidebarProfileMenu" class="collapse">
-                        <div class="menu-item pt-5px">
-                            <a href="javascript:;" class="menu-link">
-                                <div class="menu-icon"><i class="fa fa-cog"></i></div>
-                                <div class="menu-text">Settings</div>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a href="javascript:;" class="menu-link">
-                                <div class="menu-icon"><i class="fa fa-pencil-alt"></i></div>
-                                <div class="menu-text"> Send Feedback</div>
-                            </a>
-                        </div>
-                        <div class="menu-item pb-5px">
-                            <a href="javascript:;" class="menu-link">
-                                <div class="menu-icon"><i class="fa fa-question-circle"></i></div>
-                                <div class="menu-text"> Helps</div>
-                            </a>
-                        </div>
-                        <div class="menu-divider m-0"></div>
-                    </div>
-                    <div class="menu-header">Navigation</div>
-
-                    <div class="menu-item">
-                        <a href="index.html" class="menu-link">
-                            <div class="menu-icon">
-                                <i class="fa fa-list-check"></i>
-                            </div>
-                            <div class="menu-text">géstion </div>
-                        </a>
-                    </div>
-
-
-                    <!-- BEGIN minify-button -->
-                    <div class="menu-item d-flex">
+ 
+                </div>
+                <!-- BEGIN minify-button -->
+                <div class="menu-item d-flex">
                         <a href="javascript:;" class="app-sidebar-minify-btn ms-auto"
                             data-toggle="app-sidebar-minify"><i class="fa fa-angle-double-left"></i></a>
                     </div>
 
                     <!-- END minify-button -->
-                </div>
+                <button class=" w-150px  m-2 btn btn-gray-400"><span class=" text-black-600">Dashboard</span> </button>
+                <button class="w-150px m-2 btn btn-gray-400"><span class=" text-black-600">affiche tout les livre</span> </button>
+                
                 <form action="scripts.php" method="POST">
                     <div class="form-group">
 
-                        <button type="submit" class="btn  btn-danger" name="sign_out" value="sign_out"><i
-                                class="fa-solid fa-right-from-bracket"></i></i></button>
+                        <button type="submit" class="btn mx-8px w-150px h-30px btn-danger" name="sign_out" value="sign_out"><i
+                                class="fa-solid fa-right-from-bracket text-black-600"></i></button>
                     </div>
                 </form>
 
@@ -282,14 +244,14 @@ include('scripts.php');
             <!-- END scrollbar -->
 
         </div>
-        <div class="app-sidebar-bg"></div>
+       
         <div class="app-sidebar-mobile-backdrop"><a href="#" data-dismiss="app-sidebar-mobile"
                 class="stretched-link"></a></div>
         <!-- END #sidebar -->
 
         <!-- BEGIN #content -->
         <div id="content" class="app-content"
-            style="min-height: 100vh; background: url(assets/img/cover/cover-scrum-board.png) no-repeat fixed; background-size: 360px; background-position: right bottom;">
+            style="min-height: 100vh; background: url(assets/img/cover/cover3.jpeg) no-repeat fixed; background-size: cover;">
             <div class="d-flex align-items-center mb-3">
                 <div>
                     <ol class="breadcrumb">
@@ -317,9 +279,9 @@ include('scripts.php');
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></span>
             </div>
             <?php endif ?>
-            <table class="table">
+            <table class=" my-2 table bg-light-600">
                 <thead>
-                    <tr>
+                    <tr class=" bg-black-100 rounded-2" >
                         <th scope="col">isbn</th>
                         <th scope="col">Titre</th>
                         <th scope="col">Auteur</th>
@@ -327,7 +289,7 @@ include('scripts.php');
                         <th scope="col">langage</th>
 
                         <div class=" d-inline-block  ">
-                            <a href="#modal-task" onclick="resit()" data-bs-toggle="modal"
+                            <a href="#modal-task" onclick="resit();showBtn('ajouter')" data-bs-toggle="modal"
                                 class="btn btn-success btn-rounded px-4 rounded-pill"><i
                                     class="fa fa-plus fa-lg me-2 ms-n2 text-success-900"></i> Ajouter livre</a>
                         </div>
@@ -419,11 +381,10 @@ include('scripts.php');
                         </div>
                         <div class="modal-footer">
                             <a href="#" class="btn btn-white" data-bs-dismiss="modal">Cancel</a>
-                            <button type="submit" name="delete" class="btn btn-danger task-action-btn"
-                                id="task-delete-btn">supremer</a>
+                            
                                 <button type="submit" name="update" class="btn btn-warning task-action-btn"
                                     id="task-update-btn">modifier</a>
-                                    <button type="submit" name="save" class="btn btn-primary task-action-btn"
+                                    <button type="submit" name="save" class=" btn btn-primary task-action-btn"
                                         id="task-save-btn">ajouter</button>
                         </div>
                     </form>

@@ -60,7 +60,7 @@ function get_all_books()
        <a href="scripts.php?id=' . $row['id'] . '" > 
            <i class=" fs-19px fa  fa-trash  "  style="color: red;" > </i> 
        </a>
-       <a onclick="update('. $upd_params .')" data-bs-toggle="modal" href="#modal-task"> 
+       <a onclick="update('. $upd_params .');showBtn(`modifier`)" data-bs-toggle="modal" href="#modal-task"> 
            <i class=" mx-3 fs-19px   fa fa-edit  "    style="color: green; "  ></i> 
        </a>  
    </div>                   

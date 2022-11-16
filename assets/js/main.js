@@ -16,3 +16,21 @@ function update( isbn ,title ,author ,publish_year ,langage , id) {
 function resit() {
   document.getElementById("form-task").reset();
 }
+function showBtn(btn){
+ 
+  if(btn == "modifier"){
+ 
+    document.getElementById("task-save-btn").style.display = "none";
+    document.getElementById("task-update-btn").style.display = "block";
+
+  }
+
+
+  else if(btn == "ajouter"){
+   document.getElementById("task-save-btn").style.display = "block";
+    document.getElementById("task-update-btn").style.display = "none";
+    
+  }
+
+
+}
