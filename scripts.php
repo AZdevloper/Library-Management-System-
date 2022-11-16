@@ -8,8 +8,8 @@ if (isset($_POST['update']))
   update_book();
 if (isset($_GET['id']))
   delete_book();
-  if (isset($_POST['sauvegarde']))
-    update_profile();
+if (isset($_POST['sauvegarde']))
+  update_profile();
 
 
 // if (isset($_GET['id'])) {
@@ -25,14 +25,25 @@ if (isset($_POST['sign_out'])) {
 
 function get_all_books()
 {
+  $userid = $_SESSION["userid"];
   global $conn;
 
 
   $sql = "SELECT
-          b.id,  b.title, b.author, b.publish_year, b.isbn, l.name as language ,l.id as lang_id
-                            FROM language l
-                            JOIN book b
-                            ON l.id = b.language_id ;";
+  b.id,
+  b.title,
+  b.author,
+  b.publish_year,
+  b.isbn,
+  l.name AS language,
+  l.id AS lang_id
+FROM LANGUAGE
+  l
+JOIN book b ON
+  l.id = b.language_id
+JOIN statistical s ON
+  s.book_id = b.id
+WHERE s.action_id = 3 AND users_id = $userid;";
 
   $result = $conn->query($sql);
   foreach ($result as $row) {
@@ -51,7 +62,7 @@ function get_all_books()
       . '`';
 
     echo '  <tr>
-      <th scope="row"> ' . $row['isbn'] . '</th>
+      <td scope="row"> ' . $row['isbn'] . '</td>
       <td id="title"> ' . $row['title'] . '  </td>
       <td>' . $row['author'] . ' </td>
       <td>' . $row['publish_year'] . ' </td>
@@ -60,7 +71,7 @@ function get_all_books()
        <a href="scripts.php?id=' . $row['id'] . '" > 
            <i class=" fs-19px fa  fa-trash  "  style="color: red;" > </i> 
        </a>
-       <a onclick="update('. $upd_params .');showBtn(`modifier`)" data-bs-toggle="modal" href="#modal-task"> 
+       <a onclick="update(' . $upd_params . ');showBtn(`modifier`)" data-bs-toggle="modal" href="#modal-task"> 
            <i class=" mx-3 fs-19px   fa fa-edit  "    style="color: green; "  ></i> 
        </a>  
    </div>                   
@@ -71,17 +82,83 @@ function get_all_books()
   }
 
 }
+function get_last_three_books()
+{
+  $userid = $_SESSION["userid"];
+  global $conn;
 
+
+  $sql = "SELECT
+  b.id,
+  b.title,
+  b.author,
+  b.publish_year,
+  b.isbn,
+  l.name AS language,
+  l.id AS lang_id
+FROM LANGUAGE
+  l
+JOIN book b ON
+  l.id = b.language_id
+JOIN statistical s ON
+  s.book_id = b.id
+
+WHERE s.action_id = 3 AND users_id = $userid ORDER BY id DESC LIMIT 3; ";
+
+  $result = $conn->query($sql);
+  foreach ($result as $row) {
+    $upd_params = '`'
+      . $row['isbn']
+      . '`,`'
+      . $row['title']
+      . '`,`'
+      . $row['author']
+      . '`,`'
+      . $row['publish_year']
+      . '`,`'
+      . $row['lang_id']
+      . '`,`'
+      . $row['id']
+      . '`';
+
+    echo '  <tr>
+      <td scope="row"> ' . $row['isbn'] . '</th>
+      <td id="title"> ' . $row['title'] . '  </td>
+      <td>' . $row['author'] . ' </td>
+      <td>' . $row['publish_year'] . ' </td>
+      <td> ' . $row['language'] . '
+   <div class="d-inline-block  ms-40px">
+       <a href="scripts.php?id=' . $row['id'] . '" > 
+           <i class=" fs-19px fa  fa-trash  "  style="color: red;" > </i> 
+       </a>
+       <a onclick="update(' . $upd_params . ');showBtn(`modifier`)" data-bs-toggle="modal" href="#modal-task"> 
+           <i class=" mx-3 fs-19px   fa fa-edit  "    style="color: green; "  ></i> 
+       </a>  
+   </div>                   
+      </td>
+  
+  </tr>  ';
+
+  }
+
+}
 function delete_book()
 {
-
+  $userid = $_SESSION["userid"];
   global $conn;
 
   $id = $_GET['id'];
-  echo $id;
+ 
   //CODE HERE
-  $sql = "  DELETE FROM `book` WHERE id = '$id'";
+    
+
+
+  $sql = "DELETE FROM `book` WHERE id = '$id'";
   $result = $conn->query($sql);
+
+  $static = " INSERT INTO `statistical`( `book_id`, `users_id`, `action_id`, `date_time`) 
+  VALUES ('$id','$userid','2',now());";
+  $conn->query($static);
 
   if (!$result) {
 
@@ -90,19 +167,29 @@ function delete_book()
     header('location: index.php');
   } else {
 
-    //add action delete to statistic
-    // $sql = "    INSERT INTO `statistical`(`id`, `book_id`, `users_id`, `action_id`, `date_time`)
-    //                    VALUES (NULL,'$id','[value-3]','[value-4]','[value-5]')";
-    // $result = $conn->query($sql);
 
     $_SESSION['message'] = "book has been deleted successfully!";
     header('location: index.php');
   }
 }
-function statistical()
+function amended_book()
 {
+  $userid = $_SESSION["userid"];
   global $conn;
-  $sql = " SELECT count(*) as number FROM `book` ";
+  $sql = " SELECT count(*) as number FROM `statistical` WHERE action_id = 1 AND users_id = $userid";
+
+  $result = $conn->query($sql);
+  foreach ($result as $row) {
+    echo $row['number'];
+  }
+
+
+}
+function added_book()
+{
+  $userid = $_SESSION["userid"];
+  global $conn;
+  $sql = " SELECT count(*) as number FROM `statistical` WHERE action_id = 3 AND users_id = $userid ";
 
   $result = $conn->query($sql);
   foreach ($result as $row) {
@@ -120,6 +207,7 @@ function add_book()
   $title = $_POST["title"];
   $author = $_POST["author"];
   $isbn = $_POST["isbn"];
+  $userid = $_SESSION["userid"];
 
 
   if (empty($isbn) || empty($title) || empty($author) || empty($date) || empty($lang)) {
@@ -128,11 +216,25 @@ function add_book()
 
 
 
-    $sql = "INSERT INTO `book`(`id`, `isbn`, `Author`, `title`, `language_id`, `publish_year`)
-       VALUES (NULL,'$isbn','$author','$title','$lang',' $date');";
+    $insertbook = "INSERT INTO `book`(`id`,`isbn`, `Author`, `title`, `language_id`, `publish_year`)
+       VALUES (NULL,'$isbn','$author','$title','$lang',' $date')";
+    $result = $conn->query($insertbook);
 
-    $result = $conn->query($sql);
+    $getbookid = "SELECT MAX(id) FROM book ;";
+    $bookid = $conn->query($getbookid);
 
+    $lastbookid = 0;
+    foreach ($bookid as $row) {
+
+      $lastbookid = $row["MAX(id)"];   
+}
+echo $lastbookid ;
+   
+    $static = " INSERT INTO `statistical`( `book_id`, `users_id`, `action_id`, `date_time`) 
+      VALUES ('$lastbookid ','$userid','3',now());";
+
+    $conn->query($static);
+ 
 
     if (!$result) {
       $_SESSION['message'] = "le livre n'est étté pas ajouter !";
@@ -149,9 +251,10 @@ function add_book()
   }
 
 }
-function  update_book()
+function update_book()
 {
   
+
   global $conn;
   $date = $_POST["date"];
   $lang = $_POST["lang"];
@@ -159,6 +262,7 @@ function  update_book()
   $author = $_POST["author"];
   $isbn = $_POST["isbn"];
   $id = $_POST["input_hidden"];
+  $userid = $_SESSION["userid"];
 
 
   if (empty($isbn) || empty($title) || empty($author) || empty($date) || empty($lang)) {
@@ -169,7 +273,14 @@ function  update_book()
 
     $sql = "UPDATE `book` SET `isbn`='$isbn',`Author`='$author',
     `title`='$title',`language_id`='$lang',`publish_year`='$date' WHERE id = $id ";
-       
+
+
+ $static = " INSERT INTO `statistical`( `book_id`, `users_id`, `action_id`, `date_time`) 
+   VALUES ('$id ','$userid','1',now());";
+
+ $conn->query($static);
+
+
     $result = $conn->query($sql);
 
 
@@ -190,7 +301,8 @@ function  update_book()
 }
 
 
-function update_profile(){
+function update_profile()
+{
 
 
   global $conn;
@@ -198,39 +310,50 @@ function update_profile(){
   $userlsnam = $_POST["userlsnam"];
   $useremail = $_POST["useremail"];
   $userid = $_SESSION["userid"];
- 
 
 
 
- 
 
 
 
-    $sql = "UPDATE `users` SET `first_name`='$userfrnam',`last_name`='$userlsnam',`email`='$useremail' WHERE id =  $userid ";
-       
-    $result = $conn->query($sql);
 
 
-    if (!$result) {
-      $_SESSION['message'] = "error votre profile n'est étté pas moudifier !";
-      header('Location: index.php');
+  $sql = "UPDATE `users` SET `first_name`='$userfrnam',`last_name`='$userlsnam',`email`='$useremail' WHERE id =  $userid ";
 
-    } else {
-
-  
-           $_SESSION["userfrnam"] = $userfrnam;
-           $_SESSION["userlsnam"] = $userlsnam;
-           $_SESSION["useremail"] =  $useremail;
-         
-
-      $_SESSION['message'] = "votre profile est modifier avec succée !";
-      header('Location: index.php');
-    }
+  $result = $conn->query($sql);
 
 
+  if (!$result) {
+    $_SESSION['message'] = "error votre profile n'est étté pas moudifier !";
+    header('Location: index.php');
 
-  
+  } else {
+
+
+    $_SESSION["userfrnam"] = $userfrnam;
+    $_SESSION["userlsnam"] = $userlsnam;
+    $_SESSION["useremail"] = $useremail;
+
+
+    $_SESSION['message'] = "votre profile est modifier avec succée !";
+    header('Location: index.php');
+  }
+
+
+
+
 }
+// function deleted(){
+//   $userid = $_SESSION["userid"];
+//   global $conn;
+//   $sql = " SELECT count(*) as number FROM `statistical` WHERE action_id = 2 AND users_id = $userid";
+
+//   $result = $conn->query($sql);
+//   foreach ($result as $row) {
+//     echo $row['number'];
+//   }
+
+// }
 //ROUTING
 // if(isset($_POST['save']))        saveTask();
 // if(isset($_POST['update']))      updateTask();
