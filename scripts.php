@@ -35,6 +35,7 @@ function get_all_books()
   b.author,
   b.publish_year,
   b.isbn,
+  b.image,
   l.name AS language,
   l.id AS lang_id
 FROM LANGUAGE
@@ -63,15 +64,16 @@ WHERE s.action_id = 3 AND users_id = $userid;";
 
     echo '  <tr>
       <td scope="row"> ' . $row['isbn'] . '</td>
+      <td id="title">  <img src="assets/img/book/' . $row['image'] . '" alt="book" style=" width:50px; height:100px; " >  </td>
       <td id="title"> ' . $row['title'] . '  </td>
       <td>' . $row['author'] . ' </td>
       <td>' . $row['publish_year'] . ' </td>
-      <td> ' . $row['language'] . '
+      <td> ' . $row['language'] . '</td><td>
    <div class="d-inline-block  ms-40px">
        <a href="scripts.php?id=' . $row['id'] . '" > 
            <i class=" fs-19px fa  fa-trash  "  style="color: red;" > </i> 
        </a>
-       <a onclick="update(' . $upd_params . ');showBtn(`modifier`)" data-bs-toggle="modal" href="#modal-task"> 
+       <a onclick="update(' . $upd_params . ');showBtn(`modifier`)" data-bs-toggle="modal" href="#modal-book"> 
            <i class=" mx-3 fs-19px   fa fa-edit  "    style="color: green; "  ></i> 
        </a>  
    </div>                   
@@ -131,7 +133,7 @@ WHERE s.action_id = 3 AND users_id = $userid ORDER BY id DESC LIMIT 3; ";
        <a href="scripts.php?id=' . $row['id'] . '" > 
            <i class=" fs-19px fa  fa-trash  "  style="color: red;" > </i> 
        </a>
-       <a onclick="update(' . $upd_params . ');showBtn(`modifier`)" data-bs-toggle="modal" href="#modal-task"> 
+       <a onclick="update(' . $upd_params . ');showBtn(`modifier`)" data-bs-toggle="modal" href="#modal-book"> 
            <i class=" mx-3 fs-19px   fa fa-edit  "    style="color: green; "  ></i> 
        </a>  
    </div>                   
@@ -213,11 +215,36 @@ function add_book()
   if (empty($isbn) || empty($title) || empty($author) || empty($date) || empty($lang)) {
     $_SESSION['form_vide_message'] = "remplire toute la form !";
   } else {
+    $image = $_FILES['photo']['name'];
+
+            $filename = uniqid();
+            $extension = pathinfo( $image, PATHINFO_EXTENSION);
+            $newname = "book-".$filename.".".$extension;
 
 
+            $target = "assets/img/book/".$newname;
+            move_uploaded_file($_FILES['photo']['tmp_name'],$target);
 
-    $insertbook = "INSERT INTO `book`(`id`,`isbn`, `Author`, `title`, `language_id`, `publish_year`)
-       VALUES (NULL,'$isbn','$author','$title','$lang',' $date')";
+  // upload file 
+  // $target_dir = "uploads/";
+  // $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+  // $uploadOk = 1;
+  // $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+  // // Check if image file is a actual image or fake image
+  // if(isset($_POST["submit"])) {
+  //   $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+  //   if($check !== false) {
+  //     echo "File is an image - " . $check["mime"] . ".";
+  //     $uploadOk = 1;
+  //   } else {
+  //     echo "File is not an image.";
+  //     $uploadOk = 0;
+  //   }
+ }
+
+
+    $insertbook = "INSERT INTO `book`(`id`,`isbn`,`image`, `Author`, `title`, `language_id`, `publish_year`)
+       VALUES (NULL,'$isbn','$newname','$author','$title','$lang',' $date')";
     $result = $conn->query($insertbook);
 
     $getbookid = "SELECT MAX(id) FROM book ;";
@@ -250,7 +277,7 @@ echo $lastbookid ;
 
   }
 
-}
+
 function update_book()
 {
   

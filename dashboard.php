@@ -189,7 +189,6 @@ if ($_SESSION['con'] == 'success') {
 		<div class="app-sidebar-mobile-backdrop"><a href="#" data-dismiss="app-sidebar-mobile"
 				class="stretched-link"></a></div>
 		<!-- END #sidebar -->
-
 		<!-- BEGIN #content -->
 
 
@@ -275,83 +274,6 @@ if ($_SESSION['con'] == 'success') {
 		
 		<!-- END #app -->
 		<!-- TASK MODAL -->
-		<div class="modal fade" id="modal-task">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<form action="scripts.php" method="POST" id="form-task">
-						<div class="modal-header">
-							<h5 class="modal-title"> Ajouter livre </h5>
-							<a href="#" class="btn-close" data-bs-dismiss="modal"></a>
-						</div>
-						<?php if (isset($_SESSION['form_vide_message'])): ?>
-						<div class="alert alert-danger alert-dismissible fade show">
-							<strong>wrong!</strong>
-							<?php
-	                        echo $_SESSION['form_vide_message'];
-	                        unset($_SESSION['form_vide_message']);
-                            ?>
-							<button type="button" class="btn-close" data-bs-dismiss="alert"></span>
-						</div>
-						<?php endif ?>
-						<a href=""></a>
-						<div class="modal-body">
-							<!-- isbn	Author	title	language_id	publish_year	availabel -->
-							<!-- This Input Allows Storing Task Index  -->
-							<input name="input_hidden" type="hidden" id="book_id" value="">
-							<div class="mb-3">
-								<label class="form-label">isbn de livre </label>
-								<input type="text" name="isbn" class="form-control" id="book_isbn" />
-							</div>
-							<div class="mb-3">
-								<label class="form-label">auteur </label>
-								<input type="text" name="author" class="form-control" id="book_author" />
-							</div>
-							<div class="mb-3">
-								<label class="form-label">titre </label>
-								<input type="text" name="title" class="form-control" id="book_title" />
-							</div>
-							<div class="mb-3">
-								<label class="form-label">langue</label>
-								<select name='lang' class="form-select" id="book_lang">
-									<option selected> selectioner la langue ici </option>
-									<option id="book_english" value="1">english</option>
-									<option id="book_frensch" value="2">spanish</option>
-									<option id="book_espagnol" value="3">french</option>
-									<option id="book_arabic" value="4">arabic</option>
-								</select>
-							</div>
-							<!-- <div class="mb-3">
-                                <label class="form-label">Status</label>
-                                <select class="form-select" id="task-status" name="Status">
-                                    <option value="">Please select</option>
-                                    <option value="1">To Do</option>
-                                    <option value="2">In Progress</option>
-                                    <option value="3">Done</option>
-                                </select>
-                            </div>-->
-							<div class="mb-3">
-								<label class="form-label"> date de publication </label>
-								<input type="date" class="form-control" name="date" id="book_date" />
-							</div>
-							<!--<div class="mb-0">
-                                <label class="form-label">Description</label>
-                                <textarea class="form-control" name='Description' rows="10"
-                                    id="task-description"></textarea>
-                            </div>-->
-
-						</div>
-						<div class="modal-footer">
-							<a href="#" class="btn btn-white" data-bs-dismiss="modal">Cancel</a>
-
-							<button type="submit" name="update" class="btn btn-warning task-action-btn"
-								id="task-update-btn">modifier</a>
-								<button type="submit" name="save" class=" btn btn-primary task-action-btn"
-									id="task-save-btn">ajouter</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
 
 		<!-- ================== BEGIN core-js ================== -->
 		<script src="assets/js/vendor.min.js"></script>

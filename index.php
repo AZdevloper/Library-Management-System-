@@ -199,7 +199,7 @@ include('scripts.php');
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></span>
             </div>
             <?php endif ?> <div class=" d-inline-block  ">
-                            <a href="#modal-task" onclick="resit();showBtn('ajouter')" data-bs-toggle="modal"
+                            <a href="#modal-book" onclick="resit();showBtn('ajouter')" data-bs-toggle="modal"
                                 class="btn btn-success btn-rounded px-4 rounded-pill"><i
                                     class="fa fa-plus fa-lg me-2 ms-n2 text-success-900"></i> Ajouter livre</a>
                         </div>
@@ -207,10 +207,13 @@ include('scripts.php');
 					<thead>
 						<tr class=" bg-light-500 ">
 							<th class="rounded-start" scope="col">isbn</th>
-							<th scope="col">Titre</th>
+							<th scope="col">image</th>
+                           
+                            <th scope="col">Titre</th>
 							<th scope="col">Auteur</th>
 							<th scope="col">Année</th>
-							<th class="rounded-end" scope="col">langage</th>
+							<th scope="col">langage</th>
+							<th class="rounded-end" scope="col"></th>
 
 
 
@@ -226,6 +229,7 @@ include('scripts.php');
 					</tbody>
 				</table>
 
+
             <!-- END #content -->
 
 
@@ -236,10 +240,10 @@ include('scripts.php');
         </div>
         <!-- END #app -->
         <!-- TASK MODAL -->
-        <div class="modal fade" id="modal-task">
+        <div class="modal fade" id="modal-book">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action="scripts.php" method="POST" id="form-task">
+                    <form action="scripts.php" enctype="multipart/form-data" method="POST" id="form-task">
                         <div class="modal-header">
                             <h5 class="modal-title"> Ajouter livre </h5>
                             <a href="#" class="btn-close" data-bs-dismiss="modal"></a>
@@ -250,11 +254,11 @@ include('scripts.php');
                             <?php 
 						echo $_SESSION['form_vide_message']; 
 						unset($_SESSION['form_vide_message']);
-					?>
+					        ?>
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></span>
                         </div>
                         <?php endif ?>
-                        <a href=""></a>
+                      
                         <div class="modal-body">
                             <!-- isbn	Author	title	language_id	publish_year	availabel -->
                             <!-- This Input Allows Storing Task Index  -->
@@ -299,6 +303,10 @@ include('scripts.php');
                                 <textarea class="form-control" name='Description' rows="10"
                                     id="task-description"></textarea>
                             </div>-->
+                            <div class="mb-3">
+                                <label class="form-label"> ajouter une photo </label>
+                                <input type="file" class="form-control" name="photo" id="book_photo" />
+                            </div>
 
                         </div>
                         <div class="modal-footer">

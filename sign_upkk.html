@@ -1,69 +1,39 @@
-<?php
+<!-- <?php
 
 	session_start();
     include('connexion.php');
-   
+
     if( $_SERVER['REQUEST_METHOD'] == "POST" ){
-	
+
 		// collecte data from user 
-	
+		$first_name = $_POST['first_name'];
+		$last_name  = $_POST['last_name'];
 		$email      = $_POST['email'];
 		$password   = $_POST['password'];
 		
-		if (!empty($password) && !empty($email)) {
-		 
-		$sql = "SELECT * FROM users  WHERE email ='$email' AND password = '$password' limit 1 ";
+		if (!empty($password) && !empty($email)&& !empty($last_name )&& !empty($first_name)) {
 
+		$sql = "INSERT INTO `users`(`id`, `first_name`, `last_name`, `email`, `password`) VALUES (NULL,'$first_name ','$last_name ','$email','$password')";
 		$result =  $conn->query($sql);
-		// if ($result) {
-		// 	echo "-----------";
-		// 				die;
-		// }else {
-		// 	echo "jjjjjj";
-		// 				die;
-		// }
-		$is=0;
-		   foreach( $result as $row ) {
-           
-			    if($email==$row['email']){
-                        $is++;
-				}
-				else{
+		header("Location: sign_in.php");
+		die;  
+		
 
-				}
-		//    var_dump($row);
-		//    die;
-					
-             
-                   }
-				   if ($is>0) {
-					$is++;
-					$_SESSION["userfrnam"] = $row["first_name"];
-					$_SESSION["userlsnam"] = $row["last_name"];
-					$_SESSION["useremail"] = $row["email"];
-					$_SESSION["userid"] = $row["id"]	;
-									
-					$_SESSION['con'] = 'success' ;
-					header("Location: index.php");
-				}else {
-				
-					$_SESSION['login_error'] = 'email or password is incorrect ' ;
-					header("Location: sign_in.php");
+		}else {
+			echo "vous pouvez entrez des information valide ?";
+		}
 
-				}
-
-				
 
 	}
-}
-?>
+
+?> -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In</title>
+    <title>Sign Up</title>
     
 	<!-- ================== BEGIN core-css ================== -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -77,7 +47,7 @@
 	<div class="d-flex justify-content-center ">
 		<div class="card">
 			<div class="card-header ">
-				<h3>Sign In</h3> 
+				<h3>Sign Up</h3> <p>please fill in this form to create your account?</p>
 				<div class="d-flex justify-content-end social_icon">
 					<span><i class="fab fa-facebook-square"></i></span>
 					<span><i class="fab fa-google-plus-square"></i></span>
@@ -85,48 +55,61 @@
 				</div>
 			</div>
 			<div class="card-body h-400px w-400px">
-				<form method="post" id="" action="sign_in.php">
-					
-					<?php if(isset($_SESSION['login_error'])): ?>
-                        <div class="alert alert-danger alert-dismissible fade show">
-                            <strong>wrong!</strong>
-                            <?php 
-						echo $_SESSION['login_error'] ; 
+				<form method="post" action="sign_up.php">
+					<div class="container text-center">
+						<div class="row">
+						  <div class="col">
+							Column
+						  </div>
+						  <div class="col">
+							Column
+						  </div>
+						  <div class="col">
+							Column
+						  </div>
+						</div>
+					  </div>
+                    <div class="input-group form-group">
 						
-					        ?>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"></span>
-                        </div>
-                        <?php endif ?>
-					<div class="input-group">
-						<div class=" me-1 ">
-							<label for="email" >
+						<input type="text" class="form-control h-35px d-inline-block" placeholder="First Name" id="Name" name="first_name">
+						<input type="text" class="form-control h-35px d-inline-block" placeholder="Last Name" id="last_name" name="last_name">
+						
+					</div> 
+					<div class="input-group form-group">
+						<div class="input-group-prepend ">
+							<label for="username" >
                                 <span class="input-group-text h-35px" ><i class="fas fa-user" ></i></span>
                             </label>
 						</div>
-						<input type="text" class="form-control h-35px" placeholder="email"  name="email">
+						<input type="text" class="form-control h-35px" placeholder="Email" id="username" name="email">
 						
-					</div> <br>
+					</div> 
+                    <br>
 					<div class="input-group form-group">
 						<label for="password" >
 							<span class="input-group-text h-35px"><i class="fas fa-key"></i></span>
 						</label>
-						<input type="password" class="form-control h-35px" placeholder="password" name="password">
+						<input type="password" class="form-control h-35px" placeholder="Password" id="password">
+					</div>
+                    <div class="input-group form-group">
+						<label for="password" >
+							<span class="input-group-text h-35px"><i class="fas fa-key"></i></span>
+						</label>
+						<input type="password" class="form-control h-35px" placeholder=" Confirm Password" id="password" name="password">
 					</div>
 					<div class=" mt-3 mx-2  remember">
-						<input type="checkbox"  > Remember Me
+						<input type="checkbox"  > I accept the Terms of Use & Privacy Policy ?  
 					</div>
 					<div class="form-group">
-						<input type="submit" value="Login" class="btn btn-gray login_btn">
+						<input type="submit" value="Sign Up" class="btn btn-gray login_btn">
 					</div>
 				</form>
 			</div>
 			<div class="card-footer">
 				<div class="d-flex justify-content-center links">
-					Don't have an account?<a href="sign_up.php">Sign Up</a>
+					Already have an account ? <a href="sign_in.php"> Sign in </a>
 				</div>
-				<div class="d-flex justify-content-center">
-					<a href="#">Forgot your password?</a>
-				</div>
+			
 			</div>
 		</div>
 	</div>
