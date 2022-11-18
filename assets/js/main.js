@@ -36,12 +36,12 @@ function showBtn(btn){
 
 
 }
+sign_up_submit.disabled = true;
 sign_up_frstname.addEventListener('input',function(e){
  
-  var pattern = /^[A-Z]?[a-z]{3,15}$/;
+  var pattern =  /^[^0-9]{3,15}$/;
   var currentValue = e.target.value;
   let valid = pattern.test(currentValue);
-  console.log(valid)
 
 
 
@@ -61,10 +61,9 @@ sign_up_frstname.addEventListener('input',function(e){
 
 sign_up_lastname.addEventListener('input',function(e){
  
-  var pattern = /^[A-Z]?[a-z]{3,15}$/;
+  var pattern = /^[^0-9]{3,15}$/;
   var currentValue = e.target.value;
   let valid = pattern.test(currentValue);
-  console.log(valid)
 
 
 
@@ -82,38 +81,74 @@ sign_up_lastname.addEventListener('input',function(e){
     }
 })
 
-let check = ()=>{
+
+useremail.addEventListener('input',function(e){
+ 
+  var pattern = /^[a-zA-Z]+@[a-zA-Z]+.com$/;
+  var currentValue = e.target.value;
+  let valid = pattern.test(currentValue);
 
 
-  //Declare Reg using slash
-let reg = /abc/
-//Declare using class, useful for buil a RegExp from a variable
-reg = new RegExp('abc')
+ if (valid) {
 
-//Option you must know: i -> Not case sensitive, g -> match all the string
-let str = 'Abc abc abc'
-str.match(/abc/) //Array(1) ["abc"] match only the first and return
-console.log(str.match(/abc/) )
-str.match(/abc/g) //Array(2) ["abc","abc"] match all
-str.match(/abc/i) //Array(1) ["Abc"] not case sensitive
-str.match(/abc/ig) //Array(3) ["Abc","abc","abc"]
-//the equivalent with new RegExp is
-str.match('abc', 'ig') //Array(3) ["Abc","abc","abc"]
-}
+      e.target.classList.remove('border-danger') ;
+      label_error_email.classList.add('d-none');  
+      e.target.classList.add('border-success','border-2');
 
-// const name = document.getElementById('name')
-// const password = document.getElementById('password')
-// const form = document. getElementById('form')
-// const errorElement = document. .getElementById('error')
+    }else{
+     
+      e.target.classList.add('border-danger','border-2'); 
+      label_error_email.classList.remove('d-none') ;
 
-// form.addEventListener('submit', (e) =>
-//    let messages = []
-//    if (name. value === El II name. value == null) {
-//     messages.push('Name is required')
-//    if (password. value.length <= 6) {
-//     messages.push('Password must be longer than 6 characters')
-//    if (password.v value.length >= 20) {
-//     messages.push('Password must be less than 20 characters')
-//    if (messages.length > 0) {
-//     e.preventDefault()
-//      errorElement. innerText = messages.join(', ')
+      label_error_email.classList.add('d-block');  
+    }
+})
+
+sign_up_password.addEventListener('input',function(e){
+ 
+  var pattern1 = /[a-z]/;
+  var pattern2 = /[A-Z]/;
+  var pattern3 = /[0-9]/;
+  var currentValue = e.target.value;
+  let valid1 = pattern1.test(currentValue);
+  let valid2 = pattern2.test(currentValue);
+  let valid3 = pattern3.test(currentValue);
+
+
+
+    if (valid1 &&   valid2 && valid3 && currentValue.length >= 8) {
+
+      e.target.classList.remove('border-danger') ;
+      label_error_password.textContent = "";
+      e.target.classList.add('border-success','border-2');
+
+    }else{
+     
+      e.target.classList.add('border-danger','border-2'); 
+      label_error_password.textContent = "mote de pass peut contiens : majuscul ,miniscule ,number,plus de 8 caracter";
+
+    }
+}) 
+
+confirme_password.addEventListener('input',function(e){
+
+ if (sign_up_password.value == confirme_password.value) {
+      e.target.classList.remove('border-danger') ;
+      e.target.classList.add('border-success','border-2');
+      sign_up_submit.disabled = false;
+      label_error_password.textContent = "";
+
+    }else {
+     
+      e.target.classList.add('border-danger','border-2'); 
+      sign_up_submit.disabled = true;  
+      label_error_password.textContent = "mot de passe pas identique";
+      
+    }
+
+})
+
+
+
+
+

@@ -2,7 +2,7 @@
             $servername = 'localhost';
             $database = 'library_mgs';
             $username = 'root';
-            $password = '';
+            $password = 'root';
             
             //On essaie de se connecter
             try{
