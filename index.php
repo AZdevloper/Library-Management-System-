@@ -29,9 +29,13 @@ include('scripts.php');
     <link href="assets/css/vendor.min.css" rel="stylesheet" />
     <link href="assets/css/default/app.min.css" rel="stylesheet" />
     <!-- ================== END core-css ================== -->
+    <link rel="stylesheet" href="assets/css/css.css">
+
 </head>
 
 <body>
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/parsley.min.js"></script>
 
     <!-- BEGIN #loader -->
     <div id="loader" class="app-loader">
@@ -88,7 +92,7 @@ include('scripts.php');
         <div class="modal fade" id="form-profile">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action="scripts.php" method="POST" >
+                    <form action="scripts.php" method="POST"  data-parsley-validate="" >
                         <div class="modal-header">
                             <h5 class="modal-title">profile </h5>
                             <a href="#" class="btn-close" data-bs-dismiss="modal"></a>
@@ -96,29 +100,29 @@ include('scripts.php');
                        
                         <div class="modal-body mx-auto">
                            
-                        <img src="assets/img/users/user1.jpeg" alt="" srcset="">
+                        <img src="assets/img/users/user1.jpeg" alt="photo de profile" srcset="">
                            
 
                         </div class=" border border-success">
                             <h2 class="border-bottom m-2">informations personnels</h2>
                    
                             <div class="row  w-75 m-1">
-                                <p class="  col-4 fw-700">nom:</p>       <input class="col-8" name="userfrnam" type="text" value="<?php echo $_SESSION["userfrnam"]?>">
+                                <p class="  col-4 fw-700">nom:</p>       <input class="col-8" name="userfrnam" type="text" value="<?php echo $_SESSION["userfrnam"]?> re" data-parsley-pattern="[^0-9]{3,}"required>
                             </div>
 
                             <div class="row  w-75 m-1">
-                                <p class=" col-4 fw-700">prenom:</p>         <input class="col-8" name="userlsnam" type="text" value="<?php echo $_SESSION["userlsnam"]?>"><br>
+                                <p class=" col-4 fw-700">prenom:</p>         <input class="col-8" name="userlsnam" type="text" value="<?php echo $_SESSION["userlsnam"]?>" data-parsley-pattern="^[^0-9]{3,}$" required><br>
                             </div>
 
                             <div class="row  w-75 m-1">
-                                <p class=" col-4 fw-700">email address:</p>      <input class="col-8" name="useremail" type="text" value="<?php echo $_SESSION["useremail"] ?>"> 
+                                <p class=" col-4 fw-700">email address:</p>      <input class="col-8" name="useremail" type="text" value="<?php echo $_SESSION["useremail"] ?>" data-parsley-type="email" required> 
                                     
                             </div>                     
                     
                          <div>
                                
                                
-                                   <button type="submit" name="sauvegarde" class="btn btn-warning task-action-btn mx-2"
+                                   <button value="validate" type="submit" name="sauvegarde" class="btn btn-warning task-action-btn mx-2"
                                       >sauvegarde</button>
                                   
                             
@@ -200,8 +204,8 @@ include('scripts.php');
             </div>
             <?php endif ?> <div class=" d-inline-block  ">
                             <a href="#modal-book" onclick="resit();showBtn('ajouter')" data-bs-toggle="modal"
-                                class="btn btn-success btn-rounded px-4 rounded-pill"><i
-                                    class="fa fa-plus fa-lg me-2 ms-n2 text-success-900"></i> Ajouter livre</a>
+                                class="btn bg-light-600 btn-rounded px-4 rounded-pill"><i
+                                    class="fa fa-plus fa-lg me-2 ms-n2 "></i> Ajouter livre</a>
                         </div>
                         <table class=" my-2 table  ">
 					<thead>
@@ -243,7 +247,7 @@ include('scripts.php');
         <div class="modal fade" id="modal-book">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action="scripts.php" enctype="multipart/form-data" method="POST" id="form-task">
+                    <form action="scripts.php"  data-parsley-validate="" enctype="multipart/form-data" method="POST" id="form-task">
                         <div class="modal-header">
                             <h5 class="modal-title"> Ajouter livre </h5>
                             <a href="#" class="btn-close" data-bs-dismiss="modal"></a>
@@ -262,22 +266,22 @@ include('scripts.php');
                         <div class="modal-body">
                             <!-- isbn	Author	title	language_id	publish_year	availabel -->
                             <!-- This Input Allows Storing Task Index  -->
-                            <input name="input_hidden" type="hidden" id="book_id" value="">
+                            <input name="input_hidden" type="hidden" id="book_id" value="" >
                             <div class="mb-3">
                                 <label class="form-label">isbn de livre </label>
-                                <input type="text" name="isbn" class="form-control" id="book_isbn" />
+                                <input type="text" name="isbn" class="form-control" id="book_isbn" data-parsley-maxlength="10" required />
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">auteur </label>
-                                <input type="text" name="author" class="form-control" id="book_author" />
+                                <input type="text" name="author" class="form-control" id="book_author" data-parsley-pattern="^[^0-9]{3,15}$" required/>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">titre </label>
-                                <input type="text" name="title" class="form-control" id="book_title" />
+                                <input type="text" name="title" class="form-control" id="book_title" data-parsley-maxlength="30" required />
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">langue</label>
-                                <select name='lang' class="form-select" id="book_lang">
+                                <select name='lang' class="form-select" id="book_lang" required>
                                     <option selected> selectioner la langue ici </option>
                                     <option id="book_english" value="1">english</option>
                                     <option id="book_frensch" value="2">spanish</option>
@@ -296,7 +300,7 @@ include('scripts.php');
                             </div>-->
                             <div class="mb-3">
                                 <label class="form-label"> date de publication </label>
-                                <input type="date" class="form-control" name="date" id="book_date" />
+                                <input type="date" class="form-control" name="date" id="book_date" required />
                             </div>
                             <!--<div class="mb-0">
                                 <label class="form-label">Description</label>
@@ -305,7 +309,7 @@ include('scripts.php');
                             </div>-->
                             <div class="mb-3">
                                 <label class="form-label"> ajouter une photo </label>
-                                <input type="file" class="form-control" name="photo" id="book_photo" />
+                                <input type="file" class="form-control" name="photo" id="book_photo"  />
                             </div>
 
                         </div>
@@ -314,7 +318,7 @@ include('scripts.php');
                             
                                 <button type="submit" name="update" class="btn btn-warning task-action-btn"
                                     id="task-update-btn">modifier</a>
-                                    <button type="submit" name="save" class=" btn btn-primary task-action-btn"
+                                    <button type="submit" name="save" value="validate" class=" btn btn-primary task-action-btn"
                                         id="task-save-btn">ajouter</button>
                         </div>
                     </form>

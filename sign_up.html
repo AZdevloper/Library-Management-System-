@@ -41,13 +41,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	<link href="assets/css/vendor.min.css" rel="stylesheet" />
 	<link href="assets/css/default/app.min.css" rel="stylesheet" />
 	<!-- ================== END core-css ================== -->
+	<link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
-<body class=" d-flex justify-content-center align-items-center">
+<body class=" d-flex justify-content-center align-items-center"style="background-image: url(assets/img/cover/cover1.jpeg);backdrop-filter: blur(1px);">
 
-	<div class="container">
-		<div class="d-flex justify-content-center ">
-			<div class="card">
+
+	
+			<div class="card d-flex flex-row">
+				
+	
+		
 				<div class="card-header ">
 					<h3>Sign Up</h3>
 					<p>please fill in this form to create your account?</p>
@@ -57,7 +61,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 						<span><i class="fab fa-twitter-square"></i></span>
 					</div>
 				</div>
-				<div class="card-body h-400px w-400px">
+				<div class="card-body  " style="min-height: 400px;">
+					<h3>Sign Up</h3>
+					<p>please fill in this form to create your account?</p>
+					<div class="d-flex justify-content-end social_icon">
+						<span><i class="fab fa-facebook-square"></i></span>
+						<span><i class="fab fa-google-plus-square"></i></span>
+						<span><i class="fab fa-twitter-square"></i></span>
+					</div>
 					<form method="post" action="sign_up.php " id="sign_up_form">
 						<div class="input-group form-group" id="frst_last_input">
 
@@ -122,15 +133,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 						</div>
 					</form>
 				</div>
-				<div class="card-footer">
+				
+				<!-- <div class="card-footer">
 					<div class="d-flex justify-content-center links">
 						Already have an account ? <a href="sign_in.php"> Sign in </a>
 					</div>
 
-				</div>
+				</div> -->
 			</div>
-		</div>
-	</div>
+	
+	
 
 	<!-- ================== BEGIN core-js ================== -->
 	<script src="assets/js/vendor.min.js"></script>
