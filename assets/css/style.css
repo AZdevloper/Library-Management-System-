@@ -153,10 +153,12 @@ video{
    
 }
 .card{
+   
     margin: 1em;
 
 }
 .card_continer{
+color: #e0e0e0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -166,10 +168,19 @@ video{
 
 }
  .card-header{
-    width: 100%;
+    
 
 }
 .img_login{
     margin-top: 20px;
     width: 40%;
+}
+
+.card_col_1{
+    z-index: 1;
+
+}
+.card_col_2{
+z-index: 1;
+
 }

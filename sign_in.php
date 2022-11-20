@@ -15,27 +15,17 @@
 		$sql = "SELECT * FROM users  WHERE email ='$email' AND password = '$password' limit 1 ";
 
 		$result =  $conn->query($sql);
-		// if ($result) {
-		// 	echo "-----------";
-		// 				die;
-		// }else {
-		// 	echo "jjjjjj";
-		// 				die;
-		// }
 		$is=0;
 		   foreach( $result as $row ) {
            
 			    if($email==$row['email']){
                         $is++;
+						die;
 				}
 				else{
 
 				}
-		//    var_dump($row);
-		//    die;
-					
-             
-                   }
+ }
 				   if ($is>0) {
 					$is++;
 					$_SESSION["userfrnam"] = $row["first_name"];
