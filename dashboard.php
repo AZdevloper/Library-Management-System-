@@ -1,11 +1,11 @@
 <?php
 include('scripts.php');
-session_start();
+
 
 
 if ($_SESSION['con'] == 'success') {
 
-	echo '	hello';
+	
 
 } else {
 	header("Location: sign_in.php");

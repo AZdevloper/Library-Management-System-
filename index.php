@@ -1,6 +1,6 @@
 <?php
 include('scripts.php');
-	session_start();
+
 
 
 	if($_SESSION['con'] == 'success' ){

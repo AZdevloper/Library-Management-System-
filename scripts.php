@@ -12,10 +12,6 @@ if (isset($_POST['sauvegarde']))
   update_profile();
 
 
-// if (isset($_GET['id'])) {
-//       delete_book();
-// }
-
 if (isset($_POST['sign_out'])) {
 
   session_destroy();

@@ -1,4 +1,4 @@
-<!-- <?php
+ <?php
 
 session_start();
 include('connexion.php');
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 }
 
-?> -->
+?> 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,21 +34,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Sign Up</title>
+	<title> library MGS</title>
 
 	<!-- ================== BEGIN core-css ================== -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 	<link href="assets/css/vendor.min.css" rel="stylesheet" />
 	<link href="assets/css/default/app.min.css" rel="stylesheet" />
 	<!-- ================== END core-css ================== -->
-	<link rel="stylesheet" href="/assets/css/style.css">
+	<link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body class=""style="">
 <div class="banner">
 	
 		<video autoplay muted loop id="myVideo">
-			<source src="/assets/video/library.mp4" type="video/mp4">
+			<source src="assets/video/library.mp4" type="video/mp4">
 		  </video>
 		  
 		<div class="card_continer  ">
@@ -57,22 +57,22 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 						
 			
 				
-						<div class="card_col_1  bg-black-300   col ">
-							<div class=" flex-column row">
-								<h3 class=" col">Sign Up</h3>
-								<p class="col">please fill in this form to create your account?</p>
+						<div class="card_col_1 d-none d-sm-none d-md-block  p-3 bg-black-300 border rounded-3 ms-md-5  ms-xl-5 ms-xxl-1  col bg-opacity-65 ">
+							<div class=" flex-column row gx-lg-4">
+								<h3 class=" col"><span class=" text-blue-300">library MGS</span></h3>
+								<p class="col">A library management system is software that is designed to manage all the functions of a library.</p>
 								<div class=" col d-flex justify-content-end social_icon">
 									<span><i class="fab fa-facebook-square"></i></span>
 									<span><i class="fab fa-google-plus-square"></i></span>
 									<span><i class="fab fa-twitter-square"></i></span>
 								</div>
-								<div class=" col d-flex justify-content-center">
-									<img class="img_login" src="/assets/gif/e4c29445ec.gif" alt="">
+								<div class=" col-sm-auto d-flex justify-content-center">
+									<img class="img_login" src="assets/gif/e4c29445ec.gif" alt="">
 								</div>
 							</div>
 						</div>
 
-						<div class="card_col_2 bg-black-100 col " style="min-height: 400px;">
+						<div class="card_col_2 bg-black-100 p-3 col border rounded-3 me-xl-5 me-xxl-1 me-md-5   bg-opacity-65 " style="min-height: 400px;">
 							<h3>Sign Up</h3>
 							<p>please fill in this form to create your account?</p>
 							<div class="d-flex justify-content-end social_icon">
@@ -81,10 +81,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 								<span><i class="fab fa-twitter-square"></i></span>
 							</div>
 							<form method="post" action="sign_up.php " id="sign_up_form">
-								<div class="input-group form-group" id="frst_last_input">
+								<div class="input-group  form-group" id="frst_last_input">
 			
 									<input type="text"  class="form-control h-35px   d-inline-block" placeholder="First Name"
 										id="sign_up_frstname" name="first_name">
+										
 									<input type="text" class="form-control h-35px d-inline-block"
 										placeholder="Last Name" name="last_name" id="sign_up_lastname" >
 			
@@ -100,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 								<div class="input-group m-1 form-group">
 									<div class="input-group-prepend ">
 										<label for="username">
-											<span class="input-group-text h-35px"><i class="fas fa-user"></i></span>
+											<span class="input-group-text h-35px"><i class="fa fa-envelope"></i></span>
 										</label>
 									</div>
 									<input type="text" class="form-control h-35px" placeholder="Email" id="useremail"
@@ -146,21 +147,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 						</div>
 						
 					</div>
-					<!-- <div class="card-footer">
-						<div class="d-flex justify-content-center links">
-							Already have an account ? <a href="sign_in.php"> Sign in </a>
-						</div>
-	
-					</div> -->
+				
 				</div>
 				
 		
 		
 </div>
-<!-- <div class=" bg-black w-100 row position-absolute ">
-					<div class=" bg-light w-25 col"></div>
-					<div class=" bg-light w-25 col"></div>
-				</div> -->
+
 	<!-- ================== BEGIN core-js ================== -->
 	<script src="assets/js/vendor.min.js"></script>
 	<script src="assets/js/app.min.js"></script>

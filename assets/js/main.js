@@ -37,7 +37,8 @@ function showBtn(btn){
 
 
 }
-sign_up_submit.disabled = true;
+let sign_up_sub = document.getElementById("sign_up_submit");
+sign_up_sub.disabled = true;
 sign_up_frstname.addEventListener('input',function(e){
  
   var pattern =  /^[^0-9]{3,15}$/;
@@ -136,13 +137,13 @@ confirme_password.addEventListener('input',function(e){
  if (sign_up_password.value == confirme_password.value) {
       e.target.classList.remove('border-danger') ;
       e.target.classList.add('border-success','border-2');
-      sign_up_submit.disabled = false;
+      sign_up_sub.disabled = false;
       label_error_password.textContent = "";
 
     }else {
      
       e.target.classList.add('border-danger','border-2'); 
-      sign_up_submit.disabled = true;  
+      sign_up_sub.disabled = true;  
       label_error_password.textContent = "mot de passe pas identique";
       
     }
