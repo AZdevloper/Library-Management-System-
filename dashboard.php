@@ -237,31 +237,35 @@ if ($_SESSION['con'] == 'success') {
 				<span class=" p-2 bg-light-100  rounded text-black fw-bold ">trois dernier livre ajouter</span>
 			</div>
 			
-				<table class=" my-2 table  ">
-					<thead>
-						<tr class=" bg-light-500 ">
-							<th class="rounded-start" scope="col">isbn</th>
-							<th scope="col">Titre</th>
-							<th scope="col">Auteur</th>
-							<th scope="col">Année</th>
-							<th class="rounded-end" scope="col">langage</th>
 
-
-
-						</tr>
-
-
-					</thead>
-
-					<tbody class="bg-light-600">
-						<?php get_last_three_books() ?>
-
-
-					</tbody>
-				</table>
-			
-
-
+<div class="  table-responsive "> 
+				
+					<table class=" my-2 table  ">
+						<thead>
+							<tr class=" bg-light-500 ">
+								<th class="rounded-start" scope="col">isbn</th>
+								<th scope="col">Titre</th>
+								<th scope="col">Auteur</th>
+								<th scope="col">Année</th>
+								<th class="rounded-end" scope="col">langage</th>
+	
+	
+	
+							</tr>
+	
+	
+						</thead>
+	
+						<tbody class="bg-light-600">
+							<?php get_last_three_books() ?>
+	
+	
+						</tbody>
+					</table>
+				
+	
+	
+</div>
 			<!-- END #content -->
 
 

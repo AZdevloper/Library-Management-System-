@@ -207,31 +207,34 @@ include('scripts.php');
                                 class="btn bg-light-600 btn-rounded px-4 rounded-pill"><i
                                     class="fa fa-plus fa-lg me-2 ms-n2 "></i> Ajouter livre</a>
                         </div>
-                        <table class=" my-2 table  ">
-					<thead>
-						<tr class=" bg-light-500 ">
-							<th class="rounded-start" scope="col">isbn</th>
-							<th scope="col">image</th>
-                           
-                            <th scope="col">Titre</th>
-							<th scope="col">Auteur</th>
-							<th scope="col">Année</th>
-							<th scope="col">langage</th>
-							<th class="rounded-end" scope="col"></th>
 
-
-
-						</tr>
-
-
-					</thead>
-
-					<tbody class="bg-light-600">
-						<?php get_all_books() ?>
-
-
-					</tbody>
-				</table>
+<div class="  table-responsive ">
+    
+                            <table class=" my-2 table  " >
+                                <thead>
+                                    <tr class=" bg-light-500 ">
+                                        <th class="rounded-start" scope="col">isbn</th>
+                                        <th scope="col">image</th>
+                                    
+                                        <th scope="col">Titre</th>
+                                        <th scope="col">Auteur</th>
+                                        <th scope="col">Année</th>
+                                        <th scope="col">langage</th>
+                                        <th class="rounded-end" scope="col"></th>
+                                    </tr>
+    
+    
+                                </thead>
+    
+                                <tbody class="bg-light-600">
+                                <?php get_all_books() ?>
+    
+    
+                                </tbody>
+                            </table>
+    
+    
+</div>
 
 
             <!-- END #content -->
