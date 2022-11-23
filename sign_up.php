@@ -13,16 +13,37 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 	if (!empty($password) && !empty($email) && !empty($last_name) && !empty($first_name)) {
 
-		$sql = "INSERT INTO `users`(`id`, `first_name`, `last_name`, `email`, `password`) VALUES (NULL,'$first_name ','$last_name ','$email','$password')";
+		$sql = "SELECT * FROM users  WHERE email ='$email' limit 1 ";
+
+			$result =  $conn->query($sql);
+			$is=0;
+			foreach( $result as $row ) {
+			
+					if($email==$row['email']){
+							$is++;
+							
+					}
+				
+			}
+					if ($is>0) {
+						
+
+						$_SESSION['signup_error'] ='this emile is already exists '; 
+						header("Location: sign_up.php");
+						
+					
+					}else {
+					
+						$sql = "INSERT INTO `users`(`id`, `first_name`, `last_name`, `email`, `password`) VALUES (NULL,'$first_name ','$last_name ','$email','$password')";
 		$result = $conn->query($sql);
 		header("Location: sign_in.php");
-		die;
+					}
+
+		
+		
 
 
-	} else {
-		echo "vous pouvez entrez des information valide ?";
-	}
-
+	} 
 
 }
 
@@ -81,6 +102,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 								<span><i class="fab fa-twitter-square"></i></span>
 							</div>
 							<form method="post" action="sign_up.php " id="sign_up_form">
+							<?php if(isset($_SESSION['signup_error'])): ?>
+									<div class="alert alert-danger alert-dismissible fade show">
+										<strong>wrong!</strong>
+										<?php 
+									echo $_SESSION['signup_error'] ; 
+									
+										?>
+										<button type="button" class="btn-close" data-bs-dismiss="alert"></span>
+									</div>
+									<?php endif ?>
 								<div class="input-group  form-group" id="frst_last_input">
 			
 									<input type="text"  class="form-control h-35px   d-inline-block" placeholder="First Name"
@@ -141,7 +172,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 									<input type="checkbox"> I accept the Terms of Use & Privacy Policy ?
 								</div>
 								<div class="form-group">
-									<input type="submit" value="Sign Up"id="sign_up_submit" class="btn btn-gray login_btn">
+									<input type="submit" value="Sign Up"id="sign_up_submit" class="btn btn-gray login_btn"> <span  class=" f-w-600"> <a href="sign_in.php" rel=""> sign in</a> </span>
 								</div>
 							</form>
 						</div>

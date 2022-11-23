@@ -154,9 +154,9 @@ function delete_book()
   $sql = "DELETE FROM `book` WHERE id = '$id'";
   $result = $conn->query($sql);
 
-  $static = " INSERT INTO `statistical`( `book_id`, `users_id`, `action_id`, `date_time`) 
-  VALUES ('$id','$userid','2',now());";
-  $conn->query($static);
+  // $static = " INSERT INTO `statistical`( `book_id`, `users_id`, `action_id`, `date_time`) 
+  // VALUES ('$id','$userid','2',now());";
+  // $conn->query($static);
 
   if (!$result) {
 
@@ -206,41 +206,27 @@ function add_book()
   $author = $_POST["author"];
   $isbn = $_POST["isbn"];
   $userid = $_SESSION["userid"];
+  $image = $_FILES['photo']['name'];
 
 
-  if (empty($isbn) || empty($title) || empty($author) || empty($date) || empty($lang)) {
+  if (empty($isbn) || empty($title) || empty($author) || empty($date) || empty($lang ) ) {
     $_SESSION['form_vide_message'] = "remplire toute la form !";
   } else {
-    $image = $_FILES['photo']['name'];
+
+    // $image = $_FILES['photo']['name'];
 
             $filename = uniqid();
             $extension = pathinfo( $image, PATHINFO_EXTENSION);
             $newname = "book-".$filename.".".$extension;
-
-
             $target = "assets/img/book/".$newname;
             move_uploaded_file($_FILES['photo']['tmp_name'],$target);
 
-  // upload file 
-  // $target_dir = "uploads/";
-  // $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-  // $uploadOk = 1;
-  // $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-  // // Check if image file is a actual image or fake image
-  // if(isset($_POST["submit"])) {
-  //   $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-  //   if($check !== false) {
-  //     echo "File is an image - " . $check["mime"] . ".";
-  //     $uploadOk = 1;
-  //   } else {
-  //     echo "File is not an image.";
-  //     $uploadOk = 0;
-  //   }
  }
 
 
     $insertbook = "INSERT INTO `book`(`id`,`isbn`,`image`, `Author`, `title`, `language_id`, `publish_year`)
-       VALUES (NULL,'$isbn','$newname','$author','$title','$lang',' $date')";
+      VALUES (NULL,'$isbn','$newname','$author','$title','$lang',' $date')";
+
     $result = $conn->query($insertbook);
 
     $getbookid = "SELECT MAX(id) FROM book ;";
@@ -250,13 +236,9 @@ function add_book()
     foreach ($bookid as $row) {
 
       $lastbookid = $row["MAX(id)"];   
-}
-echo $lastbookid ;
-   
-    $static = " INSERT INTO `statistical`( `book_id`, `users_id`, `action_id`, `date_time`) 
-      VALUES ('$lastbookid ','$userid','3',now());";
+  }
+// echo $lastbookid ;
 
-    $conn->query($static);
  
 
     if (!$result) {
@@ -268,7 +250,11 @@ echo $lastbookid ;
       $_SESSION['message'] = "le livre est ajouter avec succée !";
       header('Location: index.php');
     }
+   
+    $static = " INSERT INTO `statistical`( `book_id`, `users_id`, `action_id`, `date_time`) 
+      VALUES ('$lastbookid ','$userid','3',now());";
 
+    $conn->query($static);
 
 
   }
@@ -286,36 +272,41 @@ function update_book()
   $isbn = $_POST["isbn"];
   $id = $_POST["input_hidden"];
   $userid = $_SESSION["userid"];
+  $image = $_FILES['photo']['name'];
 
-
-  if (empty($isbn) || empty($title) || empty($author) || empty($date) || empty($lang)) {
-    $_SESSION['form_vide_message'] = "remplire toute la form !";
-  } else {
-
-
-
-    $sql = "UPDATE `book` SET `isbn`='$isbn',`Author`='$author',
-    `title`='$title',`language_id`='$lang',`publish_year`='$date' WHERE id = $id ";
-
-
- $static = " INSERT INTO `statistical`( `book_id`, `users_id`, `action_id`, `date_time`) 
-   VALUES ('$id ','$userid','1',now());";
-
- $conn->query($static);
-
-
-    $result = $conn->query($sql);
-
-
-    if (!$result) {
-      $_SESSION['message'] = "le livre n'est étté pas moudifier !";
-      header('Location: index.php');
-
+    if (empty($isbn) || empty($title) || empty($author) || empty($date) || empty($lang)) {
+      $_SESSION['form_vide_message'] = "remplire toute la form !";
     } else {
 
-      $_SESSION['message'] = "le livre est modifier avec succée !";
-      header('Location: index.php');
-    }
+
+      $filename = uniqid();
+      $extension = pathinfo( $image, PATHINFO_EXTENSION);
+      $newname = "book-".$filename.".".$extension;
+      $target = "assets/img/book/".$newname;
+      move_uploaded_file($_FILES['photo']['tmp_name'],$target);
+
+      $sql = "UPDATE `book` SET `isbn`='$isbn',`Author`='$author', `image`='$newname',
+      `title`='$title',`language_id`='$lang',`publish_year`='$date' WHERE id = $id ";
+
+
+    $static = " INSERT INTO `statistical`( `book_id`, `users_id`, `action_id`, `date_time`) 
+      VALUES ('$id ','$userid','1',now());";
+
+    $conn->query($static);
+
+
+      $result = $conn->query($sql);
+
+
+      if (!$result) {
+        $_SESSION['message'] = "le livre n'est étté pas moudifier !";
+        header('Location: index.php');
+
+      } else {
+
+        $_SESSION['message'] = "le livre est modifier avec succée !";
+        header('Location: index.php');
+      }
 
 
 
@@ -333,12 +324,6 @@ function update_profile()
   $userlsnam = $_POST["userlsnam"];
   $useremail = $_POST["useremail"];
   $userid = $_SESSION["userid"];
-
-
-
-
-
-
 
 
   $sql = "UPDATE `users` SET `first_name`='$userfrnam',`last_name`='$userlsnam',`email`='$useremail' WHERE id =  $userid ";

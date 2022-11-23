@@ -132,7 +132,7 @@
 									<input type="checkbox"  > Remember Me
 								</div>
 								<div class="form-group">
-									<input type="submit" value="Login" class="btn btn-gray login_btn">
+									<input type="submit" value="Login" class="btn btn-gray login_btn"> <span> <a href="sign_up.php" rel=""> sign up</a> </span>
 								</div>
 							</form>
 						</div>

@@ -86,7 +86,7 @@ sign_up_lastname.addEventListener('input',function(e){
 
 useremail.addEventListener('input',function(e){
  
-  var pattern = /^[a-zA-Z]+@[a-zA-Z]+.com$/;
+  var pattern = /^[a-z.A-Z]+@[a-zA-Z]+.com$/;
   var currentValue = e.target.value;
   let valid = pattern.test(currentValue);
 

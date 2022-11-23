@@ -28,6 +28,8 @@ if ($_SESSION['con'] == 'success') {
 	<link href="assets/css/vendor.min.css" rel="stylesheet" />
 	<link href="assets/css/default/app.min.css" rel="stylesheet" />
 	<!-- ================== END core-css ================== -->
+	<link rel="stylesheet" href="assets/css/style.css">
+
 </head>
 
 <body>
@@ -58,7 +60,7 @@ if ($_SESSION['con'] == 'success') {
 			<!-- BEGIN header-nav -->
 			<div class="navbar-nav d-flex justify-content-between">
 				<div class="navbar-item navbar-text ms-auto me-auto d-none d-md-block ">
-					<b class="me-1 fs-1 ">Dashboard</b>
+					<b class="me-1 fs-1 ">DASHBOARD</b>
 				</div>
 
 
@@ -167,9 +169,9 @@ if ($_SESSION['con'] == 'success') {
 				<!-- END minify-button -->
 
 				<a href="dashboard.php"> <button class=" w-150px m-2 btn btn-gray-400"> <span
-							class=" text-black-600">Dashboard</span> </button></a>
+							class=" text-black-600">DASHBOARD</span> </button></a>
 				<a href="index.php"> <button href="index.php" class="w-150px m-2 btn btn-gray-400"> <span
-							class=" text-black-600">affiche tout les livre</span> </button></a>
+							class=" text-black-600">TABLEAU DES LIVRES</span> </button></a>
 
 				<form action="scripts.php" method="POST">
 					<div class="form-group">
@@ -217,7 +219,7 @@ if ($_SESSION['con'] == 'success') {
 						<?php added_book() ?>
 					</span>
 					<span class="fw-200 fs-20px m-auto ">
-						livre ajouter
+					Nombre de livres ajoutés
 					</span>
 				</span>
 				<span class=" w-200px h-100px bg-success-200 d-flex flex-column rounded">
@@ -225,7 +227,7 @@ if ($_SESSION['con'] == 'success') {
 					<?php amended_book() ?>
 					</span>
 					<span class="fw-200 fs-20px m-auto ">
-					livre modifier
+					Nmobre de  livres modifiés
 					</span>
 				</span>
 				
@@ -234,7 +236,7 @@ if ($_SESSION['con'] == 'success') {
 
 			</div>
 			<div class="d-inline-block my-2 rounded">
-				<span class=" p-2 bg-light-100  rounded text-black fw-bold ">trois dernier livre ajouter</span>
+				<span class=" p-2 bg-light-100  rounded text-black fw-bold ">Trois derniers livres ajoutés </span>
 			</div>
 			
 
@@ -243,11 +245,11 @@ if ($_SESSION['con'] == 'success') {
 					<table class=" my-2 table  ">
 						<thead>
 							<tr class=" bg-light-500 ">
-								<th class="rounded-start" scope="col">isbn</th>
+								<th class="rounded-start" scope="col">ISBN</th>
 								<th scope="col">Titre</th>
 								<th scope="col">Auteur</th>
 								<th scope="col">Année</th>
-								<th class="rounded-end" scope="col">langage</th>
+								<th class="rounded-end" scope="col">Langue</th>
 	
 	
 	
