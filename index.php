@@ -92,7 +92,7 @@ include('scripts.php');
         <div class="modal fade" id="form-profile">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action="scripts.php" method="POST" data-parsley-validate="">
+                    <form action="scripts.php" method="POST"  data-parsley-validate="">
                         <div class="modal-header">
                             <h5 class="modal-title">profile </h5>
                             <a href="#" class="btn-close" data-bs-dismiss="modal"></a>
@@ -102,9 +102,7 @@ include('scripts.php');
 
                             <img src="assets/img/users/user1.jpeg" alt="photo de profile" srcset="">
 
-
-                        </div class=" border border-success">
-                        <h2 class="border-bottom m-2">informations personnels</h2>
+                            <h2 class="border-bottom m-2">informations personnels</h2>
 
                         <div class="row  w-75 m-1">
                             <p class="  col-4 fw-700">nom:</p> <input class="col-8" name="userfrnam" type="text"
@@ -126,13 +124,15 @@ include('scripts.php');
                         </div>
 
                         <div>
-
+                            <hr>
 
                             <button value="validate" type="submit" name="sauvegarde"
                                 class="btn btn-warning task-action-btn mx-2">sauvegarde</button>
 
 
                         </div>
+                        </div >
+                       
                     </form>
                 </div>
             </div>
