@@ -30,18 +30,17 @@ include('scripts.php');
     <link href="assets/css/default/app.min.css" rel="stylesheet" />
     <!-- ================== END core-css ================== -->
     <link rel="stylesheet" href="assets/css/css.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
 
 </head>
 
 <body>
+
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/parsley.min.js"></script>
 
-    <!-- BEGIN #loader -->
-    <div id="loader" class="app-loader">
-        <span class="spinner"></span>
-    </div>
-    <!-- END #loader -->
+
 
     <!-- BEGIN #app -->
     <div id="app" class="app app-header-fixed app-sidebar-fixed">
@@ -54,14 +53,14 @@ include('scripts.php');
                 <button type="button" class="navbar-mobile-toggler" data-toggle="app-sidebar-mobile">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span> 
                 </button>
             </div>
             <!-- END navbar-header -->
             <!-- BEGIN header-nav -->
             <div class="navbar-nav d-flex ">
                 <div class="navbar-item navbar-text ms-auto me-auto d-none d-md-block ">
-                    <b class="me-1 fs-1 ">Home</b>
+                    <b id="hommm" class="me-1 fs-1 ">Home</b>
                 </div>
                 <div class="navbar-item navbar-form">
                     <form action="" method="POST" name="search" id="form">
@@ -92,7 +91,7 @@ include('scripts.php');
         <div class="modal fade" id="form-profile">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action="scripts.php" method="POST"  data-parsley-validate="">
+                    <form action="scripts.php" method="POST" data-parsley-validate="">
                         <div class="modal-header">
                             <h5 class="modal-title">profile </h5>
                             <a href="#" class="btn-close" data-bs-dismiss="modal"></a>
@@ -104,35 +103,35 @@ include('scripts.php');
 
                             <h2 class="border-bottom m-2">informations personnels</h2>
 
-                        <div class="row  w-75 m-1">
-                            <p class="  col-4 fw-700">nom:</p> <input class="col-8" name="userfrnam" type="text"
-                                value="<?php echo $_SESSION["userfrnam"]?> re" data-parsley-pattern="[^0-9]{3,}"
-                                required>
+                            <div class="row  w-75 m-1">
+                                <p class="  col-4 fw-700">nom:</p> <input class="col-8" name="userfrnam" type="text"
+                                    value="<?php echo $_SESSION["userfrnam"]?> re" data-parsley-pattern="[^0-9]{3,}"
+                                    required>
+                            </div>
+
+                            <div class="row  w-75 m-1">
+                                <p class=" col-4 fw-700">prenom:</p> <input class="col-8" name="userlsnam" type="text"
+                                    value="<?php echo $_SESSION["userlsnam"]?>" data-parsley-pattern="^[^0-9]{3,}$"
+                                    required><br>
+                            </div>
+
+                            <div class="row  w-75 m-1">
+                                <p class=" col-4 fw-700">email address:</p> <input class="col-8" name="useremail"
+                                    type="text" value="<?php echo $_SESSION["useremail"] ?>" data-parsley-type="email"
+                                    required>
+
+                            </div>
+
+                            <div>
+                                <hr>
+
+                                <button value="validate" type="submit" name="sauvegarde"
+                                    class="btn btn-warning task-action-btn mx-2">sauvegarde</button>
+
+
+                            </div>
                         </div>
 
-                        <div class="row  w-75 m-1">
-                            <p class=" col-4 fw-700">prenom:</p> <input class="col-8" name="userlsnam" type="text"
-                                value="<?php echo $_SESSION["userlsnam"]?>" data-parsley-pattern="^[^0-9]{3,}$"
-                                required><br>
-                        </div>
-
-                        <div class="row  w-75 m-1">
-                            <p class=" col-4 fw-700">email address:</p> <input class="col-8" name="useremail"
-                                type="text" value="<?php echo $_SESSION["useremail"] ?>" data-parsley-type="email"
-                                required>
-
-                        </div>
-
-                        <div>
-                            <hr>
-
-                            <button value="validate" type="submit" name="sauvegarde"
-                                class="btn btn-warning task-action-btn mx-2">sauvegarde</button>
-
-
-                        </div>
-                        </div >
-                       
                     </form>
                 </div>
             </div>
@@ -217,7 +216,6 @@ include('scripts.php');
             </div>
 
             <div class="  table-responsive ">
-
                 <table class=" my-2 table  ">
                     <thead>
                         <tr class=" bg-light-500 ">
@@ -276,8 +274,7 @@ include('scripts.php');
                         <?php endif ?>
 
                         <div class="modal-body">
-                            <!-- isbn	Author	title	language_id	publish_year	availabel -->
-                            <!-- This Input Allows Storing Task Index  -->
+             
                             <input name="input_hidden" type="hidden" id="book_id" value="">
                             <div class="mb-3">
                                 <label class="form-label">isbn de livre </label>
@@ -297,31 +294,19 @@ include('scripts.php');
                             <div class="mb-3">
                                 <label class="form-label">langue</label>
                                 <select name='lang' class="form-select" id="book_lang" required="">
-                                    <option  selected value=""> </option>
+                                    <option selected value=""> </option>
                                     <option id="book_english" value="1">english</option>
                                     <option id="book_frensch" value="2">spanish</option>
                                     <option id="book_espagnol" value="3">french</option>
                                     <option id="book_arabic" value="4">arabic</option>
                                 </select>
                             </div>
-                            <!-- <div class="mb-3">
-                                <label class="form-label">Status</label>
-                                <select class="form-select" id="task-status" name="Status">
-                                    <option value="">Please select</option>
-                                    <option value="1">To Do</option>
-                                    <option value="2">In Progress</option>
-                                    <option value="3">Done</option>
-                                </select>
-                            </div>-->
+                         
                             <div class="mb-3">
                                 <label class="form-label"> date de publication </label>
                                 <input type="date" class="form-control" name="date" id="book_date" required />
                             </div>
-                            <!--<div class="mb-0">
-                                <label class="form-label">Description</label>
-                                <textarea class="form-control" name='Description' rows="10"
-                                    id="task-description"></textarea>
-                            </div>-->
+                        
                             <div class="mb-3">
                                 <label class="form-label"> ajouter une photo </label>
                                 <input type="file" class="form-control" name="photo" id="book_photo" />
@@ -348,8 +333,7 @@ include('scripts.php');
 
         <!-- ================== END core-js ================== -->
 
-        <script>
-        </script>
+       
 </body>
 
 </html>

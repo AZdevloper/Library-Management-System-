@@ -29,17 +29,13 @@ if ($_SESSION['con'] == 'success') {
 	<link href="assets/css/default/app.min.css" rel="stylesheet" />
 	<!-- ================== END core-css ================== -->
 	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="assets/css/style.css">
 
 </head>
 
 <body>
 
-	<!-- BEGIN #loader -->
-	<div id="loader" class="app-loader">
-		<span class="spinner"></span>
-	</div>
-	<!-- END #loader -->
-
+	
 	<!-- BEGIN #app -->
 	<div id="app" class="app app-header-fixed app-sidebar-fixed">
 		<!-- BEGIN #header -->
@@ -221,7 +217,7 @@ if ($_SESSION['con'] == 'success') {
 					<span class="fw-800 fs-20px m-auto ">
 						<?php added_book() ?>
 					</span>
-					<span class="fw-200 fs-20px m-auto ">
+					<span class="fw-200 fs-20px m-auto  p-1 ">
 					Nombre de livres ajoutés
 					</span>
 				</span>
@@ -229,7 +225,7 @@ if ($_SESSION['con'] == 'success') {
 					<span class="fw-800 fs-20px m-auto ">
 					<?php amended_book() ?>
 					</span>
-					<span class="fw-200 fs-20px m-auto ">
+					<span class="fw-200 fs-20px m-auto p-1 ">
 					Nmobre de  livres modifiés
 					</span>
 				</span>
